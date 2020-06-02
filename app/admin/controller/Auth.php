@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\Admin;
+use app\admin\model\Admin as AdminModel;
 use think\facade\Cache;
 
 class Auth extends BaseController
@@ -13,7 +13,7 @@ class Auth extends BaseController
         if (request()->isPost()) {
             $username = input("username");
             $password = input("password");
-            $user = Admin::where([
+            $user = AdminModel::where([
                 'username' => $username,
                 'password' => md5($password)
             ])->find();
