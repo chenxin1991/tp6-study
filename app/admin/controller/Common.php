@@ -9,6 +9,7 @@ class Common extends BaseController
 {
     public function getRoles()
     {
-        return json(RoleModel::select());
+        $roles = RoleModel::select();
+        return json($roles);
     }
 }
