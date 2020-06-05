@@ -60,6 +60,12 @@ class Car extends BaseController
         $price = input('price');
         $km_standard = input('km_standard');
         $km_price = input('km_price');
+        $floor_standard = input('floor_standard');
+        $floor_price = input('floor_price');
+        $distance1 = input('distance1');
+        $distance2 = input('distance2');
+        $distance3 = input('distance3');
+        $distance4 = input('distance4');
         $car->name = $name;
         $car->load = $load;
         $car->size = $size;
@@ -67,6 +73,12 @@ class Car extends BaseController
         $car->price = $price;
         $car->km_standard = $km_standard;
         $car->km_price = $km_price;
+        $car->floor_standard = $floor_standard;
+        $car->floor_price = $floor_price;
+        $car->distance1 = $distance1;
+        $car->distance2 = $distance2;
+        $car->distance3 = $distance3;
+        $car->distance4 = $distance4;
         $car->save();
     }
 
