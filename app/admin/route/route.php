@@ -32,6 +32,8 @@ Route::group(function () {
     Route::post('LargeGood', 'LargeGood/add');
     Route::put('LargeGood/:id', 'LargeGood/edit');
     Route::delete('LargeGood/:id', 'LargeGood/del');
+    //居民搬家订单
+    Route::get('ResidentOrder', 'ResidentOrder/index');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
