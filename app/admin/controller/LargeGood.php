@@ -56,6 +56,6 @@ class LargeGood extends BaseController
 
     public function del($id)
     {
-        CarModel::destroy($id);
+        LargeGoodModel::destroy($id);
     }
 }

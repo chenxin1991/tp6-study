@@ -36,4 +36,7 @@ Route::group(function () {
     Route::get('ResidentOrder', 'ResidentOrder/index');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
+    Route::get('common/getCars', 'common/getCars');
+    Route::get('common/getOnOffGoods', 'common/getOnOffGoods');
+    Route::get('common/getLargeGoods', 'common/getLargeGoods');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
