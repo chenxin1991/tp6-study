@@ -7,6 +7,7 @@ use app\admin\model\Role as RoleModel;
 use app\admin\model\Car as CarModel;
 use app\admin\model\OnOffGood as OnOffGoodModel;
 use app\admin\model\LargeGood as LargeGoodModel;
+use app\admin\model\AppletConfig as AppletConfigModel;
 
 class Common extends BaseController
 {
@@ -32,5 +33,12 @@ class Common extends BaseController
     {
         $large_goods = LargeGoodModel::select();
         return json($large_goods);
+    }
+
+
+    public function getAppletConfig($id)
+    {
+        $applet_cofig = AppletConfigModel::find($id);
+        return $applet_cofig;
     }
 }

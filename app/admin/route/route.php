@@ -32,6 +32,9 @@ Route::group(function () {
     Route::post('LargeGood', 'LargeGood/add');
     Route::put('LargeGood/:id', 'LargeGood/edit');
     Route::delete('LargeGood/:id', 'LargeGood/del');
+    //参数设置
+    Route::get('applet_config/:id', 'applet_config/detail');
+    Route::put('applet_config/:id', 'applet_config/edit');
     //居民搬家订单
     Route::get('ResidentOrder', 'ResidentOrder/index');
     //基础数据
@@ -39,4 +42,5 @@ Route::group(function () {
     Route::get('common/getCars', 'common/getCars');
     Route::get('common/getOnOffGoods', 'common/getOnOffGoods');
     Route::get('common/getLargeGoods', 'common/getLargeGoods');
+    Route::get('common/getAppletConfig/:id', 'common/getAppletConfig');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
