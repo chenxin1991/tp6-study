@@ -37,6 +37,7 @@ Route::group(function () {
     Route::put('applet_config/:id', 'applet_config/edit');
     //居民搬家订单
     Route::get('ResidentOrder', 'ResidentOrder/index');
+    Route::post('ResidentOrder', 'ResidentOrder/add');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');
