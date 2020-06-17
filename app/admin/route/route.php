@@ -33,11 +33,13 @@ Route::group(function () {
     Route::put('LargeGood/:id', 'LargeGood/edit');
     Route::delete('LargeGood/:id', 'LargeGood/del');
     //参数设置
-    Route::get('applet_config/:id', 'applet_config/detail');
-    Route::put('applet_config/:id', 'applet_config/edit');
+    Route::get('AppletConfig/:id', 'AppletConfig/detail');
+    Route::put('AppletConfig/:id', 'AppletConfig/edit');
     //居民搬家订单
     Route::get('ResidentOrder', 'ResidentOrder/index');
     Route::post('ResidentOrder', 'ResidentOrder/add');
+    Route::put('ResidentOrder/:id', 'ResidentOrder/edit');
+    Route::delete('ResidentOrder/:id', 'ResidentOrder/del');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');
