@@ -15,6 +15,11 @@ class ResidentOrder extends Model
         return $this->belongsTo(Admin::class, 'operator')->bind(['username' => 'name']);
     }
 
+    public function leader()
+    {
+        return $this->belongsTo(Leader::class, 'leader')->bind(['leadername' => 'name']);
+    }
+
     public function getSourceAttr($value)
     {
         $status = [0 => '来电', 1 => '上门', 2 => '小程序'];

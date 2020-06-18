@@ -10,11 +10,11 @@ class ResidentOrder extends BaseController
 {
     public function index()
     {
-        $number = input('number');
+        $keyword = input('keyword');
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = ResidentOrderModel::with('user')->where('number', 'like', '%' . $number . '%')->page($pageNo, $pageSize)->select()->toArray();
-        $count = ResidentOrderModel::where('number', 'like', '%' . $number . '%')->count();
+        $data = ResidentOrderModel::with(['user','leader'])->where('number', 'like', '%' . $keyword . '%')->page($pageNo, $pageSize)->select()->toArray();
+        $count = ResidentOrderModel::where('number', 'like', '%' . $keyword . '%')->count();
         $result = [
             'code' => 200,
             'message' => '',
@@ -35,10 +35,11 @@ class ResidentOrder extends BaseController
         $token = request()->token;
         $user = Cache::get($token);
         $date = date('Ymd');
-        $order = ResidentOrderModel::where('DATE_FORMAT(create_time,\'%Y%m%d\')', $date)->order('create_time', 'desc')->find();
+        $order = ResidentOrderModel::whereDay('create_time')->order('create_time', 'desc')->find();
         if ($order) {
             $new_number = intval(substr($order->number, -4)) + 1;
-            $order_number = $date . $new_number;
+            $new_str = str_pad($new_number, 4, "0", STR_PAD_LEFT);
+            $order_number = $date . $new_str;
         } else {
             $order_number = $date . '0001';
         }

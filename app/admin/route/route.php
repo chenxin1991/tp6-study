@@ -32,6 +32,11 @@ Route::group(function () {
     Route::post('LargeGood', 'LargeGood/add');
     Route::put('LargeGood/:id', 'LargeGood/edit');
     Route::delete('LargeGood/:id', 'LargeGood/del');
+    //队长
+    Route::get('Leader', 'Leader/index');
+    Route::post('Leader', 'Leader/add');
+    Route::put('Leader/:id', 'Leader/edit');
+    Route::delete('Leader/:id', 'Leader/del');
     //参数设置
     Route::get('AppletConfig/:id', 'AppletConfig/detail');
     Route::put('AppletConfig/:id', 'AppletConfig/edit');
@@ -46,4 +51,5 @@ Route::group(function () {
     Route::get('common/getOnOffGoods', 'common/getOnOffGoods');
     Route::get('common/getLargeGoods', 'common/getLargeGoods');
     Route::get('common/getAppletConfig/:id', 'common/getAppletConfig');
+    Route::get('common/getLeaders', 'common/getLeaders');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;

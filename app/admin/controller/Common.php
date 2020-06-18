@@ -8,6 +8,7 @@ use app\admin\model\Car as CarModel;
 use app\admin\model\OnOffGood as OnOffGoodModel;
 use app\admin\model\LargeGood as LargeGoodModel;
 use app\admin\model\AppletConfig as AppletConfigModel;
+use app\admin\model\Leader as LeaderModel;
 
 class Common extends BaseController
 {
@@ -40,5 +41,11 @@ class Common extends BaseController
     {
         $applet_cofig = AppletConfigModel::find($id);
         return $applet_cofig;
+    }
+
+    public function getLeaders()
+    {
+        $leaders = LeaderModel::select();
+        return json($leaders);
     }
 }
