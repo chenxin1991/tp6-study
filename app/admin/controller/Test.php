@@ -51,4 +51,14 @@ class Test extends BaseController
 
         return json($result);
     }
+
+    public function avatar()
+    {
+        $file = request()->file('avatar');
+        $savename = \think\facade\Filesystem::disk('public')->putFile( 'goods', $file);
+        return json([
+            'status' => 'done',
+            'url' => 'http://demo.tp6.cn/storage/' . $savename
+        ]);
+    }
 }

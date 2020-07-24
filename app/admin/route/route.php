@@ -4,6 +4,7 @@ use think\facade\Route;
 
 Route::post('auth/login', 'auth/login');
 Route::get('test', 'test/index');
+Route::post('test/avatar', 'test/avatar');
 Route::group(function () {
     Route::post('auth/logout', 'auth/logout');
     Route::get('list/article', 'index/article');
