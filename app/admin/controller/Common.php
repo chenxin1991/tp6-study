@@ -9,6 +9,7 @@ use app\admin\model\OnOffGood as OnOffGoodModel;
 use app\admin\model\LargeGood as LargeGoodModel;
 use app\admin\model\AppletConfig as AppletConfigModel;
 use app\admin\model\Leader as LeaderModel;
+use app\admin\model\Category as CategoryModel;
 
 class Common extends BaseController
 {
@@ -47,5 +48,11 @@ class Common extends BaseController
     {
         $leaders = LeaderModel::select();
         return json($leaders);
+    }
+
+    public function getCategory()
+    {
+        $category = CategoryModel::select();
+        return json($category);
     }
 }

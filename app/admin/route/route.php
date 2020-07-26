@@ -53,4 +53,15 @@ Route::group(function () {
     Route::get('common/getLargeGoods', 'common/getLargeGoods');
     Route::get('common/getAppletConfig/:id', 'common/getAppletConfig');
     Route::get('common/getLeaders', 'common/getLeaders');
+    Route::get('common/getCategory', 'common/getCategory');
+    //物品分类
+    Route::get('Category', 'Category/index');
+    Route::post('Category', 'Category/add');
+    Route::put('Category/:id', 'Category/edit');
+    Route::delete('Category/:id', 'Category/del');
+    //物品
+    Route::get('Goods', 'Goods/index');
+    Route::post('Goods', 'Goods/add');
+    Route::put('Goods/:id', 'Goods/edit');
+    Route::delete('Goods/:id', 'Goods/del');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
