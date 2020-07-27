@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\Goods as GoodsModel;
+use app\models\Goods as GoodsModel;
 
 class Goods extends BaseController
 {

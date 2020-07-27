@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\AppletConfig as AppletConfigModel;
+use app\models\AppletConfig as AppletConfigModel;
 
 class AppletConfig extends BaseController
 {

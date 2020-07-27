@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\Car as CarModel;
+use app\models\Car as CarModel;
 
 class Car extends BaseController
 {
@@ -45,6 +45,7 @@ class Car extends BaseController
         $car = new CarModel;
         $car->name = $name;
         $car->price = $price;
+        $car->image_url = $image_url;
         $car->km_standard = $km_standard;
         $car->km_price = $km_price;
         $car->floor_standard = $floor_standard;

@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\Category as CategoryModel;
+use app\models\Category as CategoryModel;
 
 class Category extends BaseController
 {
