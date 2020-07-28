@@ -58,7 +58,7 @@ class Test extends BaseController
         $savename = \think\facade\Filesystem::disk('public')->putFile('goods', $file);
         return json([
             'status' => 'done',
-            'url' => $this->app->config->get('app.app_host') . 'storage/' . str_replace('\\', '/', $savename)
+            'url' => $this->app->config->get('app.app_host') . '/storage/' . str_replace('\\', '/', $savename)
         ]);
     }
 }
