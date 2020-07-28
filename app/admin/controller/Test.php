@@ -55,10 +55,10 @@ class Test extends BaseController
     public function avatar()
     {
         $file = request()->file('avatar');
-        $savename = \think\facade\Filesystem::disk('public')->putFile( 'goods', $file);
+        $savename = \think\facade\Filesystem::disk('public')->putFile('goods', $file);
         return json([
             'status' => 'done',
-            'url' => 'http://demo.tp6.cn/storage/' . $savename
+            'url' => $this->app->config->get('app.app_host') . 'storage/' . str_replace('\\', '/', $savename)
         ]);
     }
 }

@@ -28,7 +28,7 @@ class Category extends BaseController
             'msg' => 'ok',
             'data' => $data
         ];
-        
+
         return json($result);
     }
 }
