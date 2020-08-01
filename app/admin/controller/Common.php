@@ -5,9 +5,9 @@ namespace app\admin\controller;
 use app\BaseController;
 use app\admin\model\Role as RoleModel;
 use app\models\Car as CarModel;
-use app\admin\model\AppletConfig as AppletConfigModel;
 use app\admin\model\Leader as LeaderModel;
 use app\models\Category as CategoryModel;
+use app\models\AppletConfig as AppletConfigModel;
 
 class Common extends BaseController
 {
