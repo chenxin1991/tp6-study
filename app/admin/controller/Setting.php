@@ -3,18 +3,18 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\models\AppletConfig as AppletConfigModel;
+use app\models\Setting as SettingModel;
 
-class AppletConfig extends BaseController
+class Setting extends BaseController
 {
     public function detail($id)
     {
-        $applet_cofig = AppletConfigModel::find($id);
+        $setting = SettingModel::find($id);
         $result = [
             'code' => 200,
             'message' => '',
             'result' => [
-                'data' => $applet_cofig,
+                'data' => $setting,
             ],
             'timestamp' => time()
         ];
@@ -23,7 +23,7 @@ class AppletConfig extends BaseController
 
     public function edit($id)
     {
-        $config = AppletConfigModel::find($id);
+        $setting = SettingModel::find($id);
         $discount1 = input('discount1');
         $discount2 = input('discount2');
         $add_ratio1 = input('add_ratio1');
@@ -34,17 +34,17 @@ class AppletConfig extends BaseController
         $onoff_remark = input('onoff_remark');
         $large_remark = input('large_remark');
         $remark = input('remark');
-        $config->discount1 = $discount1;
-        $config->discount2 = $discount2;
-        $config->add_ratio1 = $add_ratio1;
-        $config->add_ratio2 = $add_ratio2;
-        $config->carry_remark = $carry_remark;
-        $config->floor_remark = $floor_remark;
-        $config->distance_remark = $distance_remark;
-        $config->onoff_remark = $onoff_remark;
-        $config->large_remark = $large_remark;
-        $config->remark = $remark;
-        $config->save();
+        $setting->discount1 = $discount1;
+        $setting->discount2 = $discount2;
+        $setting->add_ratio1 = $add_ratio1;
+        $setting->add_ratio2 = $add_ratio2;
+        $setting->carry_remark = $carry_remark;
+        $setting->floor_remark = $floor_remark;
+        $setting->distance_remark = $distance_remark;
+        $setting->onoff_remark = $onoff_remark;
+        $setting->large_remark = $large_remark;
+        $setting->remark = $remark;
+        $setting->save();
     }
 
 }

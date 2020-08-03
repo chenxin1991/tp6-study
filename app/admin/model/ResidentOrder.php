@@ -6,7 +6,7 @@ use think\Model;
 
 class ResidentOrder extends Model
 {
-    protected $json = ['cars', 'routes', 'onoffs', 'larges'];
+    protected $json = ['cars', 'routes', 'goods'];
 
     protected $jsonAssoc = true;
 

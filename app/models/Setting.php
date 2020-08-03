@@ -3,7 +3,7 @@ namespace app\models;
 
 use think\Model;
 
-class AppletConfig extends Model
+class Setting extends Model
 {
 
 }

@@ -5,9 +5,10 @@ namespace app\admin\controller;
 use app\BaseController;
 use app\admin\model\Role as RoleModel;
 use app\models\Car as CarModel;
+use app\models\Goods as GoodsModel;
 use app\admin\model\Leader as LeaderModel;
 use app\models\Category as CategoryModel;
-use app\models\AppletConfig as AppletConfigModel;
+use app\models\Setting as SettingModel;
 
 class Common extends BaseController
 {
@@ -23,10 +24,16 @@ class Common extends BaseController
         return json($cars);
     }
 
-    public function getAppletConfig($id)
+    public function getGoods()
     {
-        $applet_cofig = AppletConfigModel::find($id);
-        return $applet_cofig;
+        $goods = GoodsModel::select();
+        return json($goods);
+    }
+
+    public function getSetting($id)
+    {
+        $setting = SettingModel::find($id);
+        return $setting;
     }
 
     public function getLeaders()

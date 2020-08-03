@@ -49,9 +49,8 @@ Route::group(function () {
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');
-    Route::get('common/getOnOffGoods', 'common/getOnOffGoods');
-    Route::get('common/getLargeGoods', 'common/getLargeGoods');
-    Route::get('common/getAppletConfig/:id', 'common/getAppletConfig');
+    Route::get('common/getGoods', 'common/getGoods');
+    Route::get('common/getSetting/:id', 'common/getSetting');
     Route::get('common/getLeaders', 'common/getLeaders');
     Route::get('common/getCategory', 'common/getCategory');
     //物品分类
