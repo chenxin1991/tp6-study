@@ -17,7 +17,6 @@ class Auth extends BaseController
             'password' => md5($password)
         ])->find();
         if ($user) {
-//            $token = UserToken::createToken($user, 'user');
             $str = md5(uniqid(md5(microtime(true)), true));
             $token = sha1($str . $user->username);
             Cache::set($token, ['user_id' => $user->id, 'username' => $user->username, 'name' => $user->name], 60 * 60 * 24);
