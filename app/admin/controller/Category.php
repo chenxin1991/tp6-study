@@ -11,7 +11,7 @@ class Category extends BaseController
     {
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = CategoryModel::page($pageNo, $pageSize)->select()->toArray();
+        $data = CategoryModel::page($pageNo, $pageSize)->order('sort')->select()->toArray();
         $count = CategoryModel::count();
         $result = [
             'code' => 200,
@@ -31,8 +31,10 @@ class Category extends BaseController
     public function add()
     {
         $name = input('name');
+        $sort = input('sort');
         $category = new CategoryModel;
         $category->name = $name;
+        $category->sort = $sort;
         $category->save();
 
     }
@@ -40,8 +42,10 @@ class Category extends BaseController
     public function edit($id)
     {
         $name = input('name');
+        $sort = input('sort');
         $category = CategoryModel::find($id);
         $category->name = $name;
+        $category->sort = $sort;
         $category->save();
     }
 
