@@ -13,5 +13,5 @@
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /admin/index.html [L]
+  RewriteRule . /wjdh_admin/index.html [L]
 </IfModule>
