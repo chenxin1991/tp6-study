@@ -18,7 +18,7 @@ class Category extends BaseController
             $cars[$key]['id'] = 'car_' . $value['id'];
         }
         $data[] = ['name' => '用车', 'goods' => $cars];
-        $category = CategoryModel::select()->toArray();
+        $category = CategoryModel::order('sort')->select()->toArray();
         foreach ($category as $key => $value) {
             $goods = GoodsModel::where('cid', $value['id'])->select()->toArray();
             $data[] = ['name' => $value['name'], 'goods' => $goods];
