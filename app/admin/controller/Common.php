@@ -44,7 +44,7 @@ class Common extends BaseController
 
     public function getCategory()
     {
-        $category = CategoryModel::select();
+        $category = CategoryModel::order('sort')->select();
         return json($category);
     }
 }
