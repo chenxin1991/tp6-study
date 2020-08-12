@@ -9,11 +9,19 @@ class Goods extends BaseController
 {
     public function index()
     {
+        $where = [];
         $name = input('name');
+        if ($name) {
+            $where[] = ['name', 'like', "%$name%"];
+        }
+        $cid = input('cid');
+        if ($cid) {
+            $where[] = ['cid', '=', $cid];
+        }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = GoodsModel::with('category')->where('name', 'like', '%'.$name.'%')->page($pageNo, $pageSize)->select()->toArray();
-        $count = GoodsModel::where('name', 'like', '%'.$name.'%')->count();
+        $data = GoodsModel::with('category')->where($where)->page($pageNo, $pageSize)->order('cid,sort')->select()->toArray();
+        $count = GoodsModel::where($where)->count();
         $result = [
             'code' => 200,
             'message' => '',
@@ -34,11 +42,13 @@ class Goods extends BaseController
         $name = input('name');
         $price = input('price');
         $cid = input('cid');
+        $sort = input('sort');
         $image_url = input('image_url');
         $goods = new GoodsModel;
         $goods->name = $name;
         $goods->price = $price;
         $goods->cid = $cid;
+        $goods->sort = $sort;
         $goods->image_url = $image_url;
         $goods->save();
 
@@ -50,10 +60,12 @@ class Goods extends BaseController
         $name = input('name');
         $price = input('price');
         $cid = input('cid');
+        $sort = input('sort');
         $image_url = input('image_url');
         $goods->name = $name;
         $goods->price = $price;
         $goods->cid = $cid;
+        $goods->sort = $sort;
         $goods->image_url = $image_url;
         $goods->save();
     }
