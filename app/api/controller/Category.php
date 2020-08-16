@@ -22,7 +22,7 @@ class Category extends BaseController
         $category = CategoryModel::order('sort')->select()->toArray();
         foreach ($category as $key => $value) {
             $goods = GoodsModel::where('cid', $value['id'])->order('sort')->select()->toArray();
-            $data[] = ['name' => $value['name'], 'goods' => $goods];
+            $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'goods' => $goods];
         }
         $result = [
             'status' => 200,
