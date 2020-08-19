@@ -5,7 +5,7 @@ use think\Model;
 
 class Goods extends Model
 {
-    protected $json = ['image_url'];
+    protected $json = ['images'];
 
     protected $jsonAssoc = true;
 
