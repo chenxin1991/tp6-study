@@ -27,6 +27,7 @@ class Category extends BaseController
             }
             $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'goods' => $goods];
         }
+        $data[] = ['name' => '其他大件', 'goods' => [], 'is_free' => 1];
         $result = [
             'status' => 200,
             'msg' => 'ok',
