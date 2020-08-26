@@ -6,6 +6,7 @@ use app\BaseController;
 use app\models\Car as CarModel;
 use app\models\Goods as GoodsModel;
 use app\models\Category as CategoryModel;
+use app\models\Setting as SettingModel;
 
 
 class Category extends BaseController
@@ -28,10 +29,16 @@ class Category extends BaseController
             $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'goods' => $goods];
         }
         $data[] = ['name' => '其他大件', 'goods' => [], 'is_free' => 1];
+
+        $setting = SettingModel::find(1);
+
         $result = [
             'status' => 200,
             'msg' => 'ok',
-            'data' => $data
+            'data' => [
+                'category' => $data,
+                'setting' => $setting
+            ]
         ];
 
         return json($result);
