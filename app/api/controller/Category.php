@@ -25,6 +25,7 @@ class Category extends BaseController
             $goods = GoodsModel::where('cid', $value['id'])->order('sort')->select()->toArray();
             foreach ($goods as $k => $v) {
                 $goods[$k]['image_url'] = $v['images'][0]['url'];
+                $goods[$k]['current'] = 0;
             }
             $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'goods' => $goods];
         }
