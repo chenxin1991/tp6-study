@@ -33,10 +33,12 @@ class Category extends BaseController
         $name = input('name');
         $sort = input('sort');
         $is_free = input('is_free');
+        $is_upload = input('is_upload');
         $category = new CategoryModel;
         $category->name = $name;
         $category->sort = $sort;
         $category->is_free = $is_free;
+        $category->is_upload = $is_upload;
         $category->save();
 
     }
@@ -46,10 +48,12 @@ class Category extends BaseController
         $name = input('name');
         $sort = input('sort');
         $is_free = input('is_free');
+        $is_upload = input('is_upload');
         $category = CategoryModel::find($id);
         $category->name = $name;
         $category->sort = $sort;
         $category->is_free = $is_free;
+        $category->is_upload = $is_upload;
         $category->save();
     }
 
