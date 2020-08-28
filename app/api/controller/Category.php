@@ -27,7 +27,7 @@ class Category extends BaseController
                 $goods[$k]['image_url'] = $v['images'][0]['url'];
                 $goods[$k]['current'] = 0;
             }
-            $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'goods' => $goods];
+            $data[] = ['name' => $value['name'], 'is_free' => $value['is_free'], 'is_upload' => $value['is_upload'], 'goods' => $goods];
         }
         $data[] = ['name' => '其他大件', 'goods' => [], 'is_free' => 1];
 
