@@ -33,7 +33,7 @@ class User extends Model
      */
     public static function getUser($token)
     {
-        return self::detail(['open_id' => Cache::get($token)['openid']]);
+        return self::where(['open_id' => Cache::get($token)['openid']])->find();
     }
 
     /**

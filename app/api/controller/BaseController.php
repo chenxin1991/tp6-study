@@ -4,7 +4,6 @@ namespace app\api\controller;
 
 use app\api\model\User as UserModel;
 use app\common\exception\BaseException;
-use think\Controller as ThinkController;
 
 /**
  * API控制器基类
@@ -36,7 +35,7 @@ class BaseController
      */
     private function getWxappId()
     {
-        if (!$wxapp_id = $this->request->param('wxapp_id')) {
+        if (!$wxapp_id = request()->param('wxapp_id')) {
             throw new BaseException(['msg' => '缺少必要的参数：wxapp_id']);
         }
         return $wxapp_id;
@@ -50,7 +49,7 @@ class BaseController
      */
     protected function getUser()
     {
-        if (!$token = $this->request->param('token')) {
+        if (!$token = request()->param('token')) {
             throw new BaseException(['code' => -1, 'msg' => '缺少必要的参数：token']);
         }
         if (!$user = UserModel::getUser($token)) {

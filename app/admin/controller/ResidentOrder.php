@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\ResidentOrder as ResidentOrderModel;
+use app\models\ResidentOrder as ResidentOrderModel;
 use think\facade\Cache;
 
 class ResidentOrder extends BaseController
