@@ -4,8 +4,7 @@ namespace app\api\model;
 
 use think\Model;
 use app\common\library\wechat\WxUser;
-use think\Cache;
-use think\Request;
+use think\facade\Cache;
 
 /**
  * 用户模型类
@@ -49,12 +48,11 @@ class User extends Model
     {
         // 微信登录 获取session_key
         $session = $this->wxlogin($post['code']);
-        echo $session;die;
         // 自动注册用户
         $userInfo = json_decode(htmlspecialchars_decode($post['user_info']), true);
-        $user_id = $this->register($session['openid'], $userInfo);
+        $user_id = $this->register($post['wxapp_id'], $session['openid'], $userInfo);
         // 生成token (session3rd)
-        $this->token = $this->token($session['openid']);
+        $this->token = $this->token($post['wxapp_id'],$session['openid']);
         // 记录缓存, 7天
         Cache::set($this->token, $session, 86400 * 7);
         return $user_id;
@@ -91,9 +89,8 @@ class User extends Model
      * @param $openid
      * @return string
      */
-    private function token($openid)
+    private function token($wxapp_id ,$openid)
     {
-        $wxapp_id = self::$wxapp_id;
         // 生成一个不会重复的随机字符串
         $guid = \getGuidV4();
         // 当前时间戳 (精确到毫秒)
@@ -111,15 +108,15 @@ class User extends Model
      * @throws BaseException
      * @throws \think\exception\DbException
      */
-    private function register($open_id, $userInfo)
+    private function register($wxapp_id, $open_id, $userInfo)
     {
-        if (!$user = self::get(['open_id' => $open_id])) {
+        if (!$user = self::where(['open_id' => $open_id])->find()) {
             $user = $this;
             $userInfo['open_id'] = $open_id;
-            $userInfo['wxapp_id'] = self::$wxapp_id;
+            $userInfo['wxapp_id'] = $wxapp_id;
         }
         $userInfo['nickName'] = preg_replace('/[\xf0-\xf7].{3}/', '', $userInfo['nickName']);
-        if (!$user->allowField(true)->save($userInfo)) {
+        if (!$user->save($userInfo)) {
             throw new BaseException(['msg' => '用户注册失败']);
         }
         return $user['user_id'];

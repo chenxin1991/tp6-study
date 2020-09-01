@@ -2,14 +2,13 @@
 
 namespace app\api\controller;
 
-use app\BaseController;
 use app\models\Car as CarModel;
 use app\models\Goods as GoodsModel;
 use app\models\Category as CategoryModel;
 use app\models\Setting as SettingModel;
 
 
-class Category extends BaseController
+class Category
 {
     public function index()
     {

@@ -3,13 +3,14 @@
 namespace app\api\controller;
 
 use app\api\model\User as UserModel;
+use think\Request;
 
 /**
  * 用户管理
  * Class User
  * @package app\api
  */
-class User extends Controller
+class User extends BaseController
 {
     /**
      * 用户自动登录
@@ -18,12 +19,12 @@ class User extends Controller
      * @throws \think\Exception
      * @throws \think\exception\DbException
      */
-    public function login()
+    public function login(Request $request)
     {
         $model = new UserModel;
-        $user_id = $model->login($this->request->post());
+        $user_id = $model->login($request->post());
         $token = $model->getToken();
-        return $this->renderSuccess(compact('user_id', 'token'));
+        return json($this->renderSuccess(compact('user_id', 'token')));
     }
 
 }
