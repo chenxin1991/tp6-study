@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\admin\model\Admin;
+use app\admin\model\Leader;
 use think\Model;
 
 class ResidentOrder extends Model
