@@ -31,13 +31,20 @@ class Category
         $data[] = ['name' => '其他大件', 'goods' => [], 'is_free' => 1];
 
         $setting = SettingModel::find(1);
-
+        $startDate = date('Y-m-d', strtotime('+6 hour'));
+        $endDate = date('Y-m-d', strtotime('+1 month'));
+        $todayTimeArray = [];
+        $hour = intval(date('H', strtotime('+6 hour')));
+        for ($i = $hour; $i < 24; $i++) {
+            $todayTimeArray[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
         $result = [
             'status' => 200,
             'msg' => 'ok',
             'data' => [
                 'category' => $data,
-                'setting' => $setting
+                'setting' => $setting,
+                'data' => ['startDate' => $startDate, 'endDate' => $endDate, 'todayTimeArray' => $todayTimeArray]
             ]
         ];
 

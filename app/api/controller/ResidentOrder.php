@@ -15,6 +15,6 @@ class ResidentOrder extends BaseController
         if (!$userInfo = UserModel::getUser($token)) {
             return json(['code' => -1, 'msg' => '没有找到用户信息']);
         }
-        return json(['code' => 1, 'msg' => 'success']);
+        return json(['code' => 1, 'data' => ['userinfo' => $userInfo], 'msg' => 'success']);
     }
 }
