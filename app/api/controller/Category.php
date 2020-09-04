@@ -36,7 +36,7 @@ class Category
         $todayTimeArray = [];
         $hour = intval(date('H', strtotime('+6 hour')));
         for ($i = $hour; $i < 24; $i++) {
-            $todayTimeArray[] = str_pad($i, 2, '0', STR_PAD_LEFT);
+            $todayTimeArray[] = str_pad($i, 2, '0', STR_PAD_LEFT).':00';
         }
         $result = [
             'status' => 200,
@@ -44,7 +44,7 @@ class Category
             'data' => [
                 'category' => $data,
                 'setting' => $setting,
-                'data' => ['startDate' => $startDate, 'endDate' => $endDate, 'todayTimeArray' => $todayTimeArray]
+                'date' => ['startDate' => $startDate, 'endDate' => $endDate, 'todayTimeArray' => $todayTimeArray]
             ]
         ];
 
