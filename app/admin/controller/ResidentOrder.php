@@ -13,7 +13,7 @@ class ResidentOrder extends BaseController
         $keyword = input('keyword');
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = ResidentOrderModel::with(['user','leader'])->where('number', 'like', '%' . $keyword . '%')->page($pageNo, $pageSize)->select()->toArray();
+        $data = ResidentOrderModel::with(['admin','leader'])->where('number', 'like', '%' . $keyword . '%')->page($pageNo, $pageSize)->select()->toArray();
         $count = ResidentOrderModel::where('number', 'like', '%' . $keyword . '%')->count();
         $result = [
             'code' => 200,
@@ -37,18 +37,18 @@ class ResidentOrder extends BaseController
         $date = date('Ymd');
         $order = ResidentOrderModel::whereDay('create_time')->order('create_time', 'desc')->find();
         if ($order) {
-            $new_number = intval(substr($order->number, -4)) + 1;
-            $new_str = str_pad($new_number, 4, "0", STR_PAD_LEFT);
-            $order_number = $date . $new_str;
+            $newNumber = intval(substr($order->number, -4)) + 1;
+            $newStr = str_pad($newNumber, 4, "0", STR_PAD_LEFT);
+            $orderNumber = $date . $newStr;
         } else {
-            $order_number = $date . '0001';
+            $orderNumber = $date . '0001';
         }
         $operator = $user['user_id'];
         $source = input('source');
         $customer = input('customer');
         $phone = input('phone');
-        $appointment = input('appointment');
-        $time = input('time');
+        $appointDate = input('appointDate');
+        $appointTime = input('appointTime');
         $cars = input('cars');
         $routes = input('routes');
         $goods = input('goods');
@@ -60,42 +60,42 @@ class ResidentOrder extends BaseController
         $goodsCost = input('goodsCost');
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
-        $resident_order = new ResidentOrderModel;
-        $resident_order->number = $order_number;
-        $resident_order->source = $source;
-        $resident_order->appointment = $appointment;
-        $resident_order->time = $time;
-        $resident_order->customer = $customer;
-        $resident_order->phone = $phone;
-        $resident_order->cars = $cars;
-        $resident_order->routes = $routes;
-        $resident_order->goods = $goods;
-        $resident_order->distance = $distance;
-        $resident_order->car_cost = $carCost;
-        $resident_order->distance_cost = $distanceCost;
-        $resident_order->floor_cost = $floorCost;
-        $resident_order->parking_cost = $parkingCost;
-        $resident_order->goods_cost = $goodsCost;
-        $resident_order->special_time_cost = $specialTimeCost;
-        $resident_order->total_cost = $totalCost;
-        $resident_order->operator = $operator;
+        $residentOrder = new ResidentOrderModel;
+        $residentOrder->number = $orderNumber;
+        $residentOrder->source = $source;
+        $residentOrder->appointDate = $appointDate;
+        $residentOrder->appointTime = $appointTime;
+        $residentOrder->customer = $customer;
+        $residentOrder->phone = $phone;
+        $residentOrder->cars = $cars;
+        $residentOrder->routes = $routes;
+        $residentOrder->goods = $goods;
+        $residentOrder->distance = $distance;
+        $residentOrder->carCost = $carCost;
+        $residentOrder->distanceCost = $distanceCost;
+        $residentOrder->floorCost = $floorCost;
+        $residentOrder->parkingCost = $parkingCost;
+        $residentOrder->goodsCost = $goodsCost;
+        $residentOrder->specialTimeCost = $specialTimeCost;
+        $residentOrder->totalCost = $totalCost;
+        $residentOrder->operator = $operator;
         if ($source == 2) {
-            $resident_order->order_status = 0;
+            $residentOrder->orderStatus = 0;
         } else {
-            $resident_order->order_status = 1;
+            $residentOrder->orderStatus = 1;
         }
-        $resident_order->pay_status = 0;
-        $resident_order->save();
+        $residentOrder->payStatus = 0;
+        $residentOrder->save();
     }
 
     public function edit($id)
     {
-        $resident_order = ResidentOrderModel::find($id);
+        $residentOrder = ResidentOrderModel::find($id);
         $source = input('source');
         $customer = input('customer');
         $phone = input('phone');
-        $appointment = input('appointment');
-        $time = input('time');
+        $appointDate = input('appointDate');
+        $appointTime = input('appointTime');
         $cars = input('cars');
         $routes = input('routes');
         $goods = input('goods');
@@ -107,23 +107,23 @@ class ResidentOrder extends BaseController
         $goodsCost = input('goodsCost');
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
-        $resident_order->source = $source;
-        $resident_order->appointment = $appointment;
-        $resident_order->time = $time;
-        $resident_order->customer = $customer;
-        $resident_order->phone = $phone;
-        $resident_order->cars = $cars;
-        $resident_order->routes = $routes;
-        $resident_order->goods = $goods;
-        $resident_order->distance = $distance;
-        $resident_order->car_cost = $carCost;
-        $resident_order->distance_cost = $distanceCost;
-        $resident_order->floor_cost = $floorCost;
-        $resident_order->parking_cost = $parkingCost;
-        $resident_order->goods_cost = $goodsCost;
-        $resident_order->special_time_cost = $specialTimeCost;
-        $resident_order->total_cost = $totalCost;
-        $resident_order->save();
+        $residentOrder->source = $source;
+        $residentOrder->appointDate = $appointDate;
+        $residentOrder->appointTime = $appointTime;
+        $residentOrder->customer = $customer;
+        $residentOrder->phone = $phone;
+        $residentOrder->cars = $cars;
+        $residentOrder->routes = $routes;
+        $residentOrder->goods = $goods;
+        $residentOrder->distance = $distance;
+        $residentOrder->carCost = $carCost;
+        $residentOrder->distanceCost = $distanceCost;
+        $residentOrder->floorCost = $floorCost;
+        $residentOrder->parkingCost = $parkingCost;
+        $residentOrder->goodsCost = $goodsCost;
+        $residentOrder->specialTimeCost = $specialTimeCost;
+        $residentOrder->totalCost = $totalCost;
+        $residentOrder->save();
     }
 
     public function del($id)

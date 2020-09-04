@@ -12,9 +12,9 @@ class ResidentOrder extends Model
 
     protected $jsonAssoc = true;
 
-    public function user()
+    public function admin()
     {
-        return $this->belongsTo(Admin::class, 'operator')->bind(['username' => 'name']);
+        return $this->belongsTo(Admin::class, 'operator')->bind(['adminname' => 'name']);
     }
 
     public function leader()
