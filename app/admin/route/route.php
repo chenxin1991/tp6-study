@@ -39,8 +39,8 @@ Route::group(function () {
     Route::put('Leader/:id', 'Leader/edit');
     Route::delete('Leader/:id', 'Leader/del');
     //参数设置
-    Route::get('AppletConfig/:id', 'AppletConfig/detail');
-    Route::put('AppletConfig/:id', 'AppletConfig/edit');
+    Route::get('Setting', 'Setting/detail');
+    Route::put('Setting', 'Setting/edit');
     //居民搬家订单
     Route::get('ResidentOrder', 'ResidentOrder/index');
     Route::post('ResidentOrder', 'ResidentOrder/add');
@@ -50,7 +50,7 @@ Route::group(function () {
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');
     Route::get('common/getGoods', 'common/getGoods');
-    Route::get('common/getSetting/:id', 'common/getSetting');
+    Route::get('common/getSetting', 'common/getSetting');
     Route::get('common/getLeaders', 'common/getLeaders');
     Route::get('common/getCategory', 'common/getCategory');
     //物品分类

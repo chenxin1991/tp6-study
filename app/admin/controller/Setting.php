@@ -7,9 +7,9 @@ use app\models\Setting as SettingModel;
 
 class Setting extends BaseController
 {
-    public function detail($id)
+    public function detail()
     {
-        $setting = SettingModel::find($id);
+        $setting = SettingModel::find(1);
         $result = [
             'code' => 200,
             'message' => '',
@@ -21,9 +21,9 @@ class Setting extends BaseController
         return json($result);
     }
 
-    public function edit($id)
+    public function edit()
     {
-        $setting = SettingModel::find($id);
+        $setting = SettingModel::find(1);
         $discount1 = input('discount1');
         $discount2 = input('discount2');
         $add_ratio1 = input('add_ratio1');

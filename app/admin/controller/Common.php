@@ -30,9 +30,9 @@ class Common extends BaseController
         return json($goods);
     }
 
-    public function getSetting($id)
+    public function getSetting()
     {
-        $setting = SettingModel::find($id);
+        $setting = SettingModel::find(1);
         return $setting;
     }
 
