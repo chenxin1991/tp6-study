@@ -33,7 +33,7 @@ class ResidentOrder extends BaseController
     public function add()
     {
         $token = request()->token;
-        $user = Cache::get($token);
+        $admin = Cache::get($token);
         $date = date('Ymd');
         $order = ResidentOrderModel::whereDay('create_time')->order('create_time', 'desc')->find();
         if ($order) {
@@ -43,7 +43,7 @@ class ResidentOrder extends BaseController
         } else {
             $orderNumber = $date . '0001';
         }
-        $operator = $user['user_id'];
+        $operator = $admin['user_id'];
         $source = input('source');
         $customer = input('customer');
         $phone = input('phone');
