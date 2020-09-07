@@ -73,12 +73,16 @@ class ResidentOrder extends BaseController
         $cart = input('cart');
         $cart = json_decode(htmlspecialchars_decode($cart), true);
         foreach ($cart as $key => $value) {
-            if (!strstr($value['id'], 'car_')) {
+            if (!strstr($value['id'], 'car_') && !strstr($value['id'], 'other_')) {
                 $cart[$key]['key'] = $i;
                 $cart[$key]['total'] = (float)($value['num'] * $value['price']);
                 $goods[] = $cart[$key];
-                $i++;
+
+            } else if (strstr($value['id'], 'other_')) {
+                $cart[$key]['key'] = $i;
+                $goods[] = $cart[$key];
             }
+            $i++;
         }
         $distance = (float)(input('distance'));
         $carCost = input('carCost');
