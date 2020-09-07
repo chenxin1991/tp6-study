@@ -111,6 +111,14 @@ class ResidentOrder extends BaseController
         $residentOrder->orderStatus = 0;//待确认
         $residentOrder->payStatus = 0;//待支付
         $residentOrder->save();
-        return json(['code' => 1, 'msg' => 'success']);
+        return json([
+            'code' => 1,
+            'data' => [
+                'id' => $residentOrder->id,
+                'number' => $residentOrder->number,
+                'create_time' => $residentOrder->create_time
+            ],
+            'msg' => 'success'
+        ]);
     }
 }
