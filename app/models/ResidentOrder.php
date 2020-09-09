@@ -33,4 +33,78 @@ class ResidentOrder extends Model
         $status = [0 => '未支付', 1 => '已支付'];
         return $status[$value];
     }
+
+    /**
+     * 获取我的订单总数
+     * @param $user_id
+     * @param string $type
+     * @return int|string
+     */
+    public function getCount($user_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'confirmed':
+                $filter['orderStatus'] = 0;
+                break;
+            case 'dispatch':
+                $filter['orderStatus'] = 1;
+                break;
+            case 'start':
+                $filter['orderStatus'] = 2;
+                break;
+            case 'complete':
+                $filter['orderStatus'] = 3;
+                break;
+            case 'comment':
+                $filter['orderStatus'] = 4;
+                break;
+        }
+        return $this->where('user_id', '=', $user_id)
+            ->where($filter)
+            ->count();
+    }
+
+    /**
+     * 用户中心订单列表
+     * @param $user_id
+     * @param string $type
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function getList($user_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'confirmed':
+                $filter['orderStatus'] = 0;
+                break;
+            case 'dispatch':
+                $filter['orderStatus'] = 1;
+                break;
+            case 'start':
+                $filter['orderStatus'] = 2;
+                break;
+            case 'complete':
+                $filter['orderStatus'] = 3;
+                break;
+            case 'comment':
+                $filter['orderStatus'] = 4;
+                break;
+        }
+        return $this->where('user_id', '=', $user_id)
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->select()->toArray();
+    }
 }

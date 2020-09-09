@@ -1,0 +1,36 @@
+<?php
+
+namespace app\api\controller\user;
+
+use app\BaseController;
+use app\models\ResidentOrder as orderModel;
+
+class Order extends BaseController
+{
+    /* @var \app\api\model\User $user */
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = request()->user;   // 用户信息
+    }
+
+    public function list($type)
+    {
+        $model = new OrderModel;
+        $list = $model->getList($this->user['user_id'], $type);
+        foreach ($list as $key => $value){
+            foreach ($value['cars'] as $key2 => $value2){
+                $value['cars'][$key2]['id'] = 'car_' . $value['cars'][$key2]['id'];
+            }
+            $list[$key]['carsAndGoods'] = array_merge($value['cars'],$value['goods']);
+        }
+        return json([
+            'code' => 1,
+            'data' => [
+                'list' => $list
+            ],
+            'msg' => 'success'
+        ]);
+    }
+}

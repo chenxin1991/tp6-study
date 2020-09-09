@@ -2,13 +2,14 @@
 
 namespace app\api\controller;
 
+use app\BaseController;
 use app\models\Car as CarModel;
 use app\models\Goods as GoodsModel;
 use app\models\Category as CategoryModel;
 use app\models\Setting as SettingModel;
 
 
-class Category
+class Category extends BaseController
 {
     public function index()
     {
@@ -49,5 +50,15 @@ class Category
         ];
 
         return json($result);
+    }
+
+    public function uploadImage()
+    {
+        $file = request()->file('file');
+        $savename = \think\facade\Filesystem::disk('public')->putFile('wechat', $file);
+        return json([
+            'code' => '1',
+            'image_url' => $this->app->config->get('app.app_host') . '/storage/' . str_replace('\\', '/', $savename)
+        ]);
     }
 }
