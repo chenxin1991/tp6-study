@@ -3,7 +3,7 @@ declare (strict_types = 1);
 
 namespace app\middleware;
 
-use app\api\model\User as UserModel;
+use app\models\User as UserModel;
 
 class WechatMiddleware
 {

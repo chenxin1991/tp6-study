@@ -7,7 +7,6 @@ use app\models\ResidentOrder as orderModel;
 
 class Order extends BaseController
 {
-    /* @var \app\api\model\User $user */
     private $user;
 
     public function __construct()

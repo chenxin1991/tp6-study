@@ -1,6 +1,6 @@
 <?php
 
-namespace app\api\model;
+namespace app\models;
 
 use think\Model;
 use app\common\library\wechat\WxUser;

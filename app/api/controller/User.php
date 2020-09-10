@@ -3,7 +3,7 @@
 namespace app\api\controller;
 
 use app\BaseController;
-use app\api\model\User as UserModel;
+use app\models\User as UserModel;
 
 /**
  * 用户管理
@@ -12,13 +12,6 @@ use app\api\model\User as UserModel;
  */
 class User extends BaseController
 {
-    /**
-     * 用户自动登录
-     * @return array
-     * @throws \app\common\exception\BaseException
-     * @throws \think\Exception
-     * @throws \think\exception\DbException
-     */
     public function login()
     {
         $model = new UserModel;

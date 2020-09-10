@@ -3,9 +3,30 @@
 namespace app\admin\controller;
 
 use app\BaseController;
+use app\models\User as UserModel;
 
 class User extends BaseController
 {
+    public function index()
+    {
+        $pageNo = input("pageNo/d");
+        $pageSize = input("pageSize/d");
+        $data = UserModel::page($pageNo, $pageSize)->select();
+        $count = UserModel::count();
+        $result = [
+            'code' => 200,
+            'message' => '',
+            'result' => [
+                'data' => $data,
+                'pageNo' => $pageNo,
+                'pageSize' => $pageSize,
+                'totalCount' => $count,
+                'totalPage' => (int)($count / $pageSize) + 1
+            ],
+            'timestamp' => time()
+        ];
+        return json($result);
+    }
 
     public function info()
     {

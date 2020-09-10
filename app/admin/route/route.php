@@ -63,4 +63,6 @@ Route::group(function () {
     Route::post('Goods', 'Goods/add');
     Route::put('Goods/:id', 'Goods/edit');
     Route::delete('Goods/:id', 'Goods/del');
+    //微信用户
+    Route::get('User', 'User/index');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
