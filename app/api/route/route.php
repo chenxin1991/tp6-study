@@ -9,4 +9,5 @@ Route::group(function () {
     Route::post('category/uploadImage', 'category/uploadImage');
     Route::get('user/detail', 'user.index/detail');
     Route::get('user/order/list/:type', 'user.order/list');
+    Route::get('user/order/detail/:id', 'user.order/detail');
 })->middleware(\app\middleware\WechatMiddleware::class, true);;

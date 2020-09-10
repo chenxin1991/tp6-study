@@ -69,15 +69,6 @@ class ResidentOrder extends Model
             ->count();
     }
 
-    /**
-     * 用户中心订单列表
-     * @param $user_id
-     * @param string $type
-     * @return false|\PDOStatement|string|\think\Collection
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
     public function getList($user_id, $type = 'all')
     {
         // 筛选条件
@@ -107,4 +98,5 @@ class ResidentOrder extends Model
             ->order(['create_time' => 'desc'])
             ->select()->toArray();
     }
+
 }

@@ -19,16 +19,32 @@ class Order extends BaseController
     {
         $model = new OrderModel;
         $list = $model->getList($this->user['user_id'], $type);
-        foreach ($list as $key => $value){
-            foreach ($value['cars'] as $key2 => $value2){
+        foreach ($list as $key => $value) {
+            foreach ($value['cars'] as $key2 => $value2) {
                 $value['cars'][$key2]['id'] = 'car_' . $value['cars'][$key2]['id'];
             }
-            $list[$key]['carsAndGoods'] = array_merge($value['cars'],$value['goods']);
+            $list[$key]['carsAndGoods'] = array_merge($value['cars'], $value['goods']);
         }
         return json([
             'code' => 1,
             'data' => [
                 'list' => $list
+            ],
+            'msg' => 'success'
+        ]);
+    }
+
+    public function detail($id)
+    {
+        $order = OrderModel::where(['id' => $id, 'user_id' => $this->user['user_id']])->find()->toArray();
+        foreach ($order['cars'] as $key => $value) {
+            $order['cars'][$key]['id'] = 'car_' . $order['cars'][$key]['id'];
+        }
+        $order['carsAndGoods'] = array_merge($order['cars'], $order['goods']);
+        return json([
+            'code' => 1,
+            'data' => [
+                'order' => $order
             ],
             'msg' => 'success'
         ]);

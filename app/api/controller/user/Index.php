@@ -13,12 +13,6 @@ use app\models\ResidentOrder as orderModel;
 
 class Index extends BaseController
 {
-    /**
-     * 获取当前用户信息
-     * @return array
-     * @throws \app\common\exception\BaseException
-     * @throws \think\exception\DbException
-     */
     public function detail()
     {
         // 当前用户信息
