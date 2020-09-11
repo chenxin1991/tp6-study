@@ -4,6 +4,7 @@ use think\facade\Route;
 
 Route::post('user/login', 'user/login');
 Route::get('category', 'category/index');
+Route::get('carCategory', 'carCategory/index');
 Route::group(function () {
     Route::post('ResidentOrder/add', 'ResidentOrder/add');
     Route::post('category/uploadImage', 'category/uploadImage');

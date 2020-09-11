@@ -45,7 +45,8 @@ class Category extends BaseController
             'data' => [
                 'category' => $data,
                 'setting' => $setting,
-                'date' => ['startDate' => $startDate, 'endDate' => $endDate, 'todayTimeArray' => $todayTimeArray]
+                'date' => ['startDate' => $startDate, 'endDate' => $endDate, 'todayTimeArray' => $todayTimeArray],
+
             ]
         ];
 
