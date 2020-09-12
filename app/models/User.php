@@ -77,7 +77,7 @@ class User extends Model
     private function wxlogin($code)
     {
         // 微信登录 (获取session_key)
-        $WxUser = new WxUser('wxb279707651bea13a', '48023002bc670d6fafdc4786a61a60a8');
+        $WxUser = new WxUser('wxfeb7e646e470417e', '383ee0da97f5db794b4791e516f5cc4f');
         if (!$session = $WxUser->sessionKey($code)) {
             throw new BaseException(['msg' => $WxUser->getError()]);
         }
