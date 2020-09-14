@@ -52,7 +52,7 @@ class User extends Model
         $userInfo = json_decode(htmlspecialchars_decode($post['user_info']), true);
         $user_id = $this->register($post['wxapp_id'], $session['openid'], $userInfo);
         // 生成token (session3rd)
-        $this->token = $this->token($post['wxapp_id'],$session['openid']);
+        $this->token = $this->token($post['wxapp_id'], $session['openid']);
         // 记录缓存, 7天
         Cache::set($this->token, $session, 86400 * 7);
         return $user_id;
@@ -89,7 +89,7 @@ class User extends Model
      * @param $openid
      * @return string
      */
-    private function token($wxapp_id ,$openid)
+    private function token($wxapp_id, $openid)
     {
         // 生成一个不会重复的随机字符串
         $guid = \getGuidV4();

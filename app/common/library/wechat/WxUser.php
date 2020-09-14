@@ -57,4 +57,6 @@ class WxUser
         return $this->error;
     }
 
+
+
 }

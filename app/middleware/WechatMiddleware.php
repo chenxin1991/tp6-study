@@ -1,5 +1,5 @@
 <?php
-declare (strict_types = 1);
+declare (strict_types=1);
 
 namespace app\middleware;
 
@@ -11,16 +11,20 @@ class WechatMiddleware
      * 处理请求
      *
      * @param \think\Request $request
-     * @param \Closure       $next
+     * @param \Closure $next
      * @return Response
      */
     public function handle($request, \Closure $next)
     {
         if (!$token = $request->param('token')) {
-            return  json(['code' => -1, 'msg' => '缺少必要的参数：token']);
+            return json(['code' => -1, 'msg' => '缺少必要的参数：token']);
         }
+
         if (!$user = UserModel::getUser($token)) {
             return json(['code' => -1, 'msg' => '没有找到用户信息']);
+        }
+        if (!$user->mobile) {
+            return json(['code' => -2, 'msg' => '未绑定手机号']);
         }
         $request->user = $user;
         return $next($request);

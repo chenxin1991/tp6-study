@@ -3,6 +3,7 @@
 use think\facade\Route;
 
 Route::post('user/login', 'user/login');
+Route::get('user/decodePhone', 'user/decodePhone');
 Route::get('category', 'category/index');
 Route::get('carCategory', 'carCategory/index');
 Route::group(function () {
