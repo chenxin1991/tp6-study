@@ -58,6 +58,7 @@ class User extends Model
         return $user_id;
     }
 
+
     /**
      * 获取token
      * @return mixed

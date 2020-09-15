@@ -23,23 +23,26 @@ class User extends BaseController
         return json(['code' => 1, 'data' => ['token' => $token, 'user_id' => $user_id], 'msg' => 'success']);
     }
 
-    public function decodePhone()
+    public function bindPhone()
     {
-        $token = input('token');
+        if (!$token = input('token')) {
+            return json(['code' => -1, 'msg' => '缺少必要的参数：token']);
+        }
+
+        if (!$user = UserModel::getUser($token)) {
+            return json(['code' => -1, 'msg' => '没有找到用户信息']);
+        }
         $encryptedData = input('encryptedData');
         $iv = input('iv');
         $sessionKey = Cache::get($token)['session_key'];
-        $open_id = Cache::get($token)['openid'];
         $pc = new WXBizDataCrypt('wxfeb7e646e470417e', $sessionKey);
         $errCode = $pc->decryptData($encryptedData, $iv, $data );
-        $model = UserModel::where('open_id', $open_id)->find();
         if ($errCode == 0) {
-            $model->mobile = json_decode($data,true)['phoneNumber'];
-            $model->save();
+            $user->mobile = json_decode($data,true)['phoneNumber'];
+            $user->save();
             return json(['code' => 1, 'data' => $data, 'msg' => 'success']);
         } else {
             print($errCode . "\n");
         }
     }
-
 }

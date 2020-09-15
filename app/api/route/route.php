@@ -3,7 +3,8 @@
 use think\facade\Route;
 
 Route::post('user/login', 'user/login');
-Route::get('user/decodePhone', 'user/decodePhone');
+Route::post('user/isUserExist', 'user/isUserExist');
+Route::get('user/bindPhone', 'user/bindPhone');
 Route::get('category', 'category/index');
 Route::get('carCategory', 'carCategory/index');
 Route::group(function () {
