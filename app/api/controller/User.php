@@ -44,6 +44,8 @@ class User extends BaseController
                 $user->save();
                 return json(['code' => 1, 'data' => [], 'msg' => 'success']);
             }
+        }else{
+            return json(['code' => -1, 'msg' => '没有找到用户信息']);
         }
     }
 
