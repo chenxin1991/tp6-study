@@ -45,4 +45,12 @@ class User extends BaseController
             print($errCode . "\n");
         }
     }
+
+    public function unbindPhone()
+    {
+        $user = request()->user;
+        $user->mobile = '';
+        $user->save();
+        return json(['code' => 1, 'data' => [], 'msg' => 'success']);
+    }
 }
