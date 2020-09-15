@@ -6,7 +6,7 @@ use app\BaseController;
 use app\admin\model\Role as RoleModel;
 use app\models\Car as CarModel;
 use app\models\Goods as GoodsModel;
-use app\admin\model\Leader as LeaderModel;
+use app\models\Leader as LeaderModel;
 use app\models\Category as CategoryModel;
 use app\models\Setting as SettingModel;
 

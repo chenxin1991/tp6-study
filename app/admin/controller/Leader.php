@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 
 use app\BaseController;
-use app\admin\model\Leader as LeaderModel;
+use app\models\Leader as LeaderModel;
 
 class Leader extends BaseController
 {
