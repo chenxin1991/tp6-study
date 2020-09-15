@@ -36,11 +36,14 @@ class User extends BaseController
         $iv = input('iv');
         $sessionKey = Cache::get($token)['session_key'];
         $pc = new WXBizDataCrypt('wxfeb7e646e470417e', $sessionKey);
-        $errCode = $pc->decryptData($encryptedData, $iv, $data );
+        $errCode = $pc->decryptData($encryptedData, $iv, $data);
+        $mobile = json_decode($data, true)['phoneNumber'];
         if ($errCode == 0) {
-            $user->mobile = json_decode($data,true)['phoneNumber'];
-            $user->save();
-            return json(['code' => 1, 'data' => $data, 'msg' => 'success']);
+            if (!UserModel::where('mobile', $mobile)->where('user_id','<>',$user->user_id)->find()) {
+                $user->mobile = json_decode($data, true)['phoneNumber'];
+                $user->save();
+                return json(['code' => 1, 'data' => [], 'msg' => 'success']);
+            }
         } else {
             print($errCode . "\n");
         }
