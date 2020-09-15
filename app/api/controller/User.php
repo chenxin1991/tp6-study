@@ -45,7 +45,7 @@ class User extends BaseController
                 return json(['code' => 1, 'data' => [], 'msg' => 'success']);
             }
         } else {
-            return json(['code' => 0, 'data' => [], 'msg' => $errCode]);
+            return json(['code' => 0, 'data' => [], 'msg' => $sessionKey]);
         }
     }
 
