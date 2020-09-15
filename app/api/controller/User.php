@@ -20,7 +20,8 @@ class User extends BaseController
         $model = new UserModel;
         $user_id = $model->login(request()->post());
         $token = $model->getToken();
-        return json(['code' => 1, 'data' => ['token' => $token, 'user_id' => $user_id], 'msg' => 'success']);
+        $mobile = $model->getMobile();
+        return json(['code' => 1, 'data' => ['token' => $token, 'user_id' => $user_id, 'mobile' => $mobile], 'msg' => 'success']);
     }
 
     public function bindPhone()
@@ -39,12 +40,12 @@ class User extends BaseController
         $errCode = $pc->decryptData($encryptedData, $iv, $data);
         $mobile = json_decode($data, true)['phoneNumber'];
         if ($errCode == 0) {
-            if (!UserModel::where('mobile', $mobile)->where('user_id','<>',$user->user_id)->find()) {
+            if (!UserModel::where('mobile', $mobile)->where('user_id', '<>', $user->user_id)->find()) {
                 $user->mobile = json_decode($data, true)['phoneNumber'];
                 $user->save();
-                return json(['code' => 1, 'data' => [], 'msg' => 'success']);
+                return json(['code' => 1, 'data' => ['mobile' => $mobile], 'msg' => 'success']);
             }
-        }else{
+        } else {
             return json(['code' => -1, 'msg' => '没有找到用户信息']);
         }
     }

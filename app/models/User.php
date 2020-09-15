@@ -14,6 +14,7 @@ use think\facade\Cache;
 class User extends Model
 {
     private $token;
+    private $mobile;
 
     /**
      * 隐藏字段
@@ -68,6 +69,11 @@ class User extends Model
         return $this->token;
     }
 
+    public function getMobile()
+    {
+        return $this->mobile;
+    }
+
     /**
      * 微信登录
      * @param $code
@@ -120,6 +126,7 @@ class User extends Model
         if (!$user->save($userInfo)) {
             throw new BaseException(['msg' => '用户注册失败']);
         }
+        $this->mobile = $user['mobile'];
         return $user['user_id'];
     }
 
