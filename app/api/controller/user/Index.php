@@ -28,8 +28,8 @@ class Index extends BaseController
             'complete' => $model->getCount($userInfo['user_id'], 'complete'),
             'comment' => $model->getCount($userInfo['user_id'], 'comment')
         ];
-        $leader = LeaderModel::where('phone',$userInfo->mobile)->find();
-        if($leader){
+        $leader = LeaderModel::where('phone', $userInfo->mobile)->find();
+        if ($leader) {
             $isDriver = true;
         }
 
