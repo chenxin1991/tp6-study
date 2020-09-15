@@ -44,8 +44,6 @@ class User extends BaseController
                 $user->save();
                 return json(['code' => 1, 'data' => [], 'msg' => 'success']);
             }
-        } else {
-            return json(['code' => 0, 'data' => [], 'msg' => 'ffefe']);
         }
     }
 
