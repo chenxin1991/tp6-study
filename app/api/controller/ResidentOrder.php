@@ -88,6 +88,8 @@ class ResidentOrder extends BaseController
         $parkingCost = input('parkingCost');
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
+        $isOtherLarge = input('isOtherLarge');
+        $userMobile = input('userMobile');
         $user_id = $userInfo['user_id'];
         $residentOrder = new ResidentOrderModel;
         $residentOrder->number = $orderNumber;
@@ -110,6 +112,8 @@ class ResidentOrder extends BaseController
         $residentOrder->user_id = $user_id;
         $residentOrder->orderStatus = 0;//待确认
         $residentOrder->payStatus = 0;//待支付
+        $residentOrder->isOtherLarge = $isOtherLarge;
+        $residentOrder->userMobile = $userMobile;
         $residentOrder->save();
         return json([
             'code' => 1,
