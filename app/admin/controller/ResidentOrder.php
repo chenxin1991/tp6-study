@@ -108,6 +108,7 @@ class ResidentOrder extends BaseController
         $goodsCost = input('goodsCost');
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
+        $isOrigin = input('isOrigin');
         $residentOrder->source = $source;
         $residentOrder->appointDate = $appointDate;
         $residentOrder->appointTime = $appointTime;
@@ -124,6 +125,7 @@ class ResidentOrder extends BaseController
         $residentOrder->goodsCost = $goodsCost;
         $residentOrder->specialTimeCost = $specialTimeCost;
         $residentOrder->totalCost = $totalCost;
+        $residentOrder->isOrigin = $isOrigin;
         $residentOrder->save();
     }
 
