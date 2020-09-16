@@ -113,6 +113,7 @@ class ResidentOrder extends BaseController
         $residentOrder->orderStatus = 0;//待确认
         $residentOrder->payStatus = 0;//待支付
         $residentOrder->isOtherLarge = $isOtherLarge;
+        $residentOrder->isOrigin = $isOtherLarge;
         $residentOrder->userMobile = $userMobile;
         $residentOrder->save();
         return json([
