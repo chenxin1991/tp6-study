@@ -18,15 +18,14 @@ class AuthTokenMiddleware
     {
         $token = $request->header('access-token');
         if($token){
-            $user = Cache::get($token);
-            if(!$user){
+            $admin = Cache::get($token);
+            if(!$admin){
                 return \think\Response::create()->code(401);
             }
         }else{
             return \think\Response::create()->code(401);
         }
-        $request->token = $token;
-        $request->user = $user;
+        $request->admin = $admin;
         return $next($request);
     }
 }

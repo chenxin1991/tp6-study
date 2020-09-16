@@ -33,8 +33,7 @@ class ResidentOrder extends BaseController
 
     public function add()
     {
-        $token = request()->token;
-        $admin = Cache::get($token);
+        $admin = request()->admin;
         $date = date('Ymd');
         $order = ResidentOrderModel::whereDay('create_time')->order('create_time', 'desc')->find();
         if ($order) {
@@ -80,11 +79,7 @@ class ResidentOrder extends BaseController
         $residentOrder->specialTimeCost = $specialTimeCost;
         $residentOrder->totalCost = $totalCost;
         $residentOrder->operator = $operator;
-        if ($source == 2) {
-            $residentOrder->orderStatus = 0;
-        } else {
-            $residentOrder->orderStatus = 1;
-        }
+        $residentOrder->orderStatus = 0;
         $residentOrder->payStatus = 0;
         $residentOrder->save();
     }
@@ -132,5 +127,14 @@ class ResidentOrder extends BaseController
     public function del($id)
     {
         ResidentOrderModel::destroy($id);
+    }
+
+    public function confirm($id)
+    {
+        $admin = request()->admin;
+        $model = ResidentOrderModel::find($id);
+        $model->orderStatus = 1;
+        $model->operator = $admin['user_id'];
+        $model->save();
     }
 }
