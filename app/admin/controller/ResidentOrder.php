@@ -13,7 +13,7 @@ class ResidentOrder extends BaseController
         $keyword = input('keyword');
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = ResidentOrderModel::with(['admin','leader'])->where('number', 'like', '%' . $keyword . '%')
+        $data = ResidentOrderModel::with(['admin', 'leader'])->where('number', 'like', '%' . $keyword . '%')
             ->page($pageNo, $pageSize)->order('create_time', 'desc')->select();
         $count = ResidentOrderModel::where('number', 'like', '%' . $keyword . '%')->count();
         $result = [
@@ -135,6 +135,15 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = 1;
         $model->operator = $admin['user_id'];
+        $model->save();
+    }
+
+    public function dispatch($id)
+    {
+        $leader = input('leader');
+        $model = ResidentOrderModel::find($id);
+        $model->orderStatus = 2;
+        $model->leader = $leader;
         $model->save();
     }
 }
