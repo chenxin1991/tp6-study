@@ -90,6 +90,7 @@ class ResidentOrder extends BaseController
         $totalCost = input('totalCost');
         $isOtherLarge = input('isOtherLarge');
         $userMobile = input('userMobile');
+        $remark = input('remark');
         $user_id = $userInfo['user_id'];
         $residentOrder = new ResidentOrderModel;
         $residentOrder->number = $orderNumber;
@@ -115,6 +116,7 @@ class ResidentOrder extends BaseController
         $residentOrder->isOtherLarge = $isOtherLarge;
         $residentOrder->isOrigin = $isOtherLarge;
         $residentOrder->userMobile = $userMobile;
+        $residentOrder->remark = $remark;
         $residentOrder->save();
         return json([
             'code' => 1,

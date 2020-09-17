@@ -99,4 +99,64 @@ class ResidentOrder extends Model
             ->select()->toArray();
     }
 
+    public function getDriverOrderCount($leader_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'confirmed':
+                $filter['orderStatus'] = 0;
+                break;
+            case 'dispatch':
+                $filter['orderStatus'] = 1;
+                break;
+            case 'start':
+                $filter['orderStatus'] = 2;
+                break;
+            case 'complete':
+                $filter['orderStatus'] = 3;
+                break;
+            case 'comment':
+                $filter['orderStatus'] = 4;
+                break;
+        }
+        return $this->where('leader', '=', $leader_id)
+            ->where($filter)
+            ->count();
+    }
+
+    //获取指定状态司机订单总数
+    public function driverOrderList($leader_id, $type = 'all')
+    {
+        // 筛选条件
+        $filter = [];
+        // 订单数据类型
+        switch ($type) {
+            case 'all':
+                break;
+            case 'confirmed':
+                $filter['orderStatus'] = 0;
+                break;
+            case 'dispatch':
+                $filter['orderStatus'] = 1;
+                break;
+            case 'start':
+                $filter['orderStatus'] = 2;
+                break;
+            case 'complete':
+                $filter['orderStatus'] = 3;
+                break;
+            case 'comment':
+                $filter['orderStatus'] = 4;
+                break;
+        }
+        return $this->where('leader', '=', $leader_id)
+            ->where($filter)
+            ->order(['create_time' => 'desc'])
+            ->select()->toArray();
+    }
+
 }
