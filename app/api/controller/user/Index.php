@@ -31,6 +31,20 @@ class Index extends BaseController
         $leader = LeaderModel::where('phone', $userInfo->mobile)->find();
         if ($leader) {
             $isDriver = true;
+            $driverOrderCount = [
+                'start' => $model->getDriverOrderCount($leader->id, 'start'),
+                'complete' => $model->getDriverOrderCount($leader->id, 'complete')
+            ];
+            return json([
+                'code' => 1,
+                'data' => [
+                    'userInfo' => $userInfo,
+                    'orderCount' => $orderCount,
+                    'isDriver' => $isDriver,
+                    'driverOrderCount' => $driverOrderCount
+                ],
+                'msg' => 'success'
+            ]);
         }
 
         return json([
