@@ -38,7 +38,7 @@ class Order extends BaseController
 
     public function detail($id)
     {
-        $order = OrderModel::where(['id' => $id, 'user_id' => $this->user['user_id']])->find()->toArray();
+        $order = OrderModel::where(['id' => $id])->find()->toArray();
         foreach ($order['cars'] as $key => $value) {
             $order['cars'][$key]['id'] = 'car_' . $order['cars'][$key]['id'];
         }
