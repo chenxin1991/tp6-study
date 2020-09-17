@@ -60,6 +60,7 @@ class ResidentOrder extends BaseController
         $goodsCost = input('goodsCost');
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
+        $remark = input('remark');
         $residentOrder = new ResidentOrderModel;
         $residentOrder->number = $orderNumber;
         $residentOrder->source = $source;
@@ -81,6 +82,7 @@ class ResidentOrder extends BaseController
         $residentOrder->operator = $operator;
         $residentOrder->orderStatus = 0;
         $residentOrder->payStatus = 0;
+        $residentOrder->remark = $remark;
         $residentOrder->save();
     }
 
@@ -104,6 +106,7 @@ class ResidentOrder extends BaseController
         $specialTimeCost = input('specialTimeCost');
         $totalCost = input('totalCost');
         $isOrigin = input('isOrigin');
+        $remark = input('remark');
         $residentOrder->source = $source;
         $residentOrder->appointDate = $appointDate;
         $residentOrder->appointTime = $appointTime;
@@ -121,6 +124,7 @@ class ResidentOrder extends BaseController
         $residentOrder->specialTimeCost = $specialTimeCost;
         $residentOrder->totalCost = $totalCost;
         $residentOrder->isOrigin = $isOrigin;
+        $residentOrder->remark = $remark;
         $residentOrder->save();
     }
 
