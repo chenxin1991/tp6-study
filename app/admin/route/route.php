@@ -48,6 +48,7 @@ Route::group(function () {
     Route::delete('ResidentOrder/:id', 'ResidentOrder/del');
     Route::post('ResidentOrder/confirm/:id', 'ResidentOrder/confirm');
     Route::post('ResidentOrder/dispatch/:id', 'ResidentOrder/dispatch');
+    Route::post('ResidentOrder/cancel/:id', 'ResidentOrder/cancel');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');

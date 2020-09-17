@@ -150,4 +150,13 @@ class ResidentOrder extends BaseController
         $model->leader = $leader;
         $model->save();
     }
+
+    public function cancel($id)
+    {
+        $cancelReason = input('cancelReason');
+        $model = ResidentOrderModel::find($id);
+        $model->orderStatus = -1;
+        $model->cancelReason = $cancelReason;
+        $model->save();
+    }
 }
