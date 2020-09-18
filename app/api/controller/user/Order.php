@@ -51,4 +51,20 @@ class Order extends BaseController
             'msg' => 'success'
         ]);
     }
+
+    public function cancel($id)
+    {
+        $cancelReason = input('cancelReason');
+        $model = OrderModel::find($id);
+        $model->orderStatus = -1;
+        $model->cancelReason = $cancelReason;
+        if ($model->save()) {
+            return json([
+                'code' => 1,
+                'data' => [
+                ],
+                'msg' => 'success'
+            ]);
+        }
+    }
 }
