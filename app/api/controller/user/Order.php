@@ -58,6 +58,7 @@ class Order extends BaseController
         $model = OrderModel::find($id);
         $model->orderStatus = -1;
         $model->cancelReason = $cancelReason;
+        $model->cancelTime = date('Y-m-d H:i:s',time());
         if ($model->save()) {
             return json([
                 'code' => 1,
