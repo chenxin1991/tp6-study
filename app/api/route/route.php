@@ -14,5 +14,6 @@ Route::group(function () {
     Route::get('driver/order/list/:type', 'driver.order/list');
     Route::get('user/order/detail/:id', 'user.order/detail');
     Route::post('user/order/cancel/:id', 'user.order/cancel');
+    Route::post('user/order/signIn/:id', 'user.order/signIn');
     Route::post('user/unbindPhone', 'user/unbindPhone');
 })->middleware(\app\middleware\WechatMiddleware::class, true);;

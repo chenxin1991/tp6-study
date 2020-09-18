@@ -67,4 +67,18 @@ class Order extends BaseController
             ]);
         }
     }
+
+    public function signIn($id){
+        $model = OrderModel::find($id);
+        $model->orderStatus = 3;
+        $model->signTime = date('Y-m-d H:i:s',time());
+        if ($model->save()) {
+            return json([
+                'code' => 1,
+                'data' => [
+                ],
+                'msg' => 'success'
+            ]);
+        }
+    }
 }
