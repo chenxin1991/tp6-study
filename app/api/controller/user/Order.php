@@ -35,11 +35,14 @@ class Order extends BaseController
 
     public function detail($id)
     {
+        $carNum = 0;
         $order = OrderModel::where(['id' => $id])->find()->toArray();
         foreach ($order['cars'] as $key => $value) {
-            $order['cars'][$key]['id'] = 'car_' . $order['cars'][$key]['id'];
+            $order['cars'][$key]['id'] = 'car_' . $value['id'];
+            $carNum += $value['num'];
         }
         $order['carsAndGoods'] = array_merge($order['cars'], $order['goods']);
+        $order['carNum'] = $carNum;
         return json([
             'code' => 1,
             'data' => [
