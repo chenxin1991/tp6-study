@@ -139,6 +139,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = 1;
         $model->operator = $admin['user_id'];
+        $model->confirmTime = date('Y-m-d H:i:s',time());
         $model->save();
     }
 
@@ -148,6 +149,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = 2;
         $model->leader = $leader;
+        $model->dispatchTime = date('Y-m-d H:i:s',time());
         $model->save();
     }
 
@@ -157,6 +159,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = -1;
         $model->cancelReason = $cancelReason;
+        $model->cancelTime = date('Y-m-d H:i:s',time());
         $model->save();
     }
 }
