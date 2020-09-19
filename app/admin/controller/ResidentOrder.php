@@ -4,18 +4,42 @@ namespace app\admin\controller;
 
 use app\BaseController;
 use app\models\ResidentOrder as ResidentOrderModel;
-use think\facade\Cache;
 
 class ResidentOrder extends BaseController
 {
     public function index()
     {
+        $where = [];
         $keyword = input('keyword');
+        if (!empty($keyword)) {
+            $where[] = ['number|customer|phone', 'like', '%' . $keyword . '%'];
+        }
+        $orderDate = input('orderDate');
+        if (!empty($orderDate) && !empty($orderDate[0]) && !empty($orderDate[1])) {
+            $where[] = ['create_time', 'between', [$orderDate[0] . ' 00:00:00', $orderDate[1] . ' 23:59:59']];
+        }
+        $appointDate = input('appointDate');
+        if (!empty($appointDate) && !empty($appointDate[0]) && !empty($appointDate[1])) {
+            $where[] = ['appointDate', 'between', $appointDate];
+        }
+        $source = input('source');
+        if (!empty($source)) {
+            $where[] = ['source', '=', $source];
+        }
+        $orderStatus = input('orderStatus');
+        if ($orderStatus != '') {
+            $where[] = ['orderStatus', '=', $orderStatus];
+        }
+        $payStatus = input('payStatus');
+        if ($payStatus != '') {
+            $where[] = ['payStatus', '=', $payStatus];
+        }
+
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = ResidentOrderModel::with(['admin', 'leader'])->where('number', 'like', '%' . $keyword . '%')
+        $data = ResidentOrderModel::with(['admin', 'leader'])->where($where)
             ->page($pageNo, $pageSize)->order('create_time', 'desc')->select();
-        $count = ResidentOrderModel::where('number', 'like', '%' . $keyword . '%')->count();
+        $count = ResidentOrderModel::where($where)->count();
         $result = [
             'code' => 200,
             'message' => '',
@@ -139,7 +163,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = 1;
         $model->operator = $admin['user_id'];
-        $model->confirmTime = date('Y-m-d H:i:s',time());
+        $model->confirmTime = date('Y-m-d H:i:s', time());
         $model->save();
     }
 
@@ -149,7 +173,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = 2;
         $model->leader = $leader;
-        $model->dispatchTime = date('Y-m-d H:i:s',time());
+        $model->dispatchTime = date('Y-m-d H:i:s', time());
         $model->save();
     }
 
@@ -159,7 +183,7 @@ class ResidentOrder extends BaseController
         $model = ResidentOrderModel::find($id);
         $model->orderStatus = -1;
         $model->cancelReason = $cancelReason;
-        $model->cancelTime = date('Y-m-d H:i:s',time());
+        $model->cancelTime = date('Y-m-d H:i:s', time());
         $model->save();
     }
 }
