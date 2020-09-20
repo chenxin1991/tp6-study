@@ -16,15 +16,6 @@ class User extends Model
     private $token;
     private $mobile;
 
-    /**
-     * 隐藏字段
-     * @var array
-     */
-    protected $hidden = [
-        'wxapp_id',
-        'create_time',
-        'update_time'
-    ];
 
     /**
      * 获取用户信息
