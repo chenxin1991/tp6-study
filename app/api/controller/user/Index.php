@@ -22,11 +22,11 @@ class Index extends BaseController
         // 订单总数
         $model = new OrderModel;
         $orderCount = [
-            'confirmed' => $model->getCount($userInfo['user_id'], 'confirmed'),
-            'dispatch' => $model->getCount($userInfo['user_id'], 'dispatch'),
-            'start' => $model->getCount($userInfo['user_id'], 'start'),
-            'complete' => $model->getCount($userInfo['user_id'], 'complete'),
-            'comment' => $model->getCount($userInfo['user_id'], 'comment')
+            'confirmed' => $model->getCount($userInfo['mobile'], 'confirmed'),
+            'dispatch' => $model->getCount($userInfo['mobile'], 'dispatch'),
+            'start' => $model->getCount($userInfo['mobile'], 'start'),
+            'complete' => $model->getCount($userInfo['mobile'], 'complete'),
+            'comment' => $model->getCount($userInfo['mobile'], 'comment')
         ];
         $leader = LeaderModel::where('phone', $userInfo->mobile)->find();
         if ($leader) {
