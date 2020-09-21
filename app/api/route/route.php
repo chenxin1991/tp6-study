@@ -15,5 +15,6 @@ Route::group(function () {
     Route::get('user/order/detail/:id', 'user.order/detail');
     Route::post('user/order/cancel/:id', 'user.order/cancel');
     Route::post('user/order/signIn/:id', 'user.order/signIn');
+    Route::post('user/order/modifyTotalCost/:id', 'user.order/modifyTotalCost');
     Route::post('user/unbindPhone', 'user/unbindPhone');
 })->middleware(\app\middleware\WechatMiddleware::class, true);

@@ -58,7 +58,7 @@ class Order extends BaseController
         $model = OrderModel::find($id);
         $model->orderStatus = -1;
         $model->cancelReason = $cancelReason;
-        $model->cancelTime = date('Y-m-d H:i:s',time());
+        $model->cancelTime = date('Y-m-d H:i:s', time());
         if ($model->save()) {
             return json([
                 'code' => 1,
@@ -69,10 +69,11 @@ class Order extends BaseController
         }
     }
 
-    public function signIn($id){
+    public function signIn($id)
+    {
         $model = OrderModel::find($id);
         $model->orderStatus = 3;
-        $model->signTime = date('Y-m-d H:i:s',time());
+        $model->signTime = date('Y-m-d H:i:s', time());
         if ($model->save()) {
             return json([
                 'code' => 1,
@@ -80,6 +81,25 @@ class Order extends BaseController
                 ],
                 'msg' => 'success'
             ]);
+        }
+    }
+
+    public function modifyTotalCost($id)
+    {
+        $newTotalCost = input('newTotalCost');
+        $costChangeRemark = input('costChangeRemark');
+        $model = orderModel::find($id);
+        if($model->totalCost != $newTotalCost){
+            $model->changeCost = $newTotalCost - $model->totalCost;
+            $model->costChangeRemark = $costChangeRemark;
+            if ($model->save()) {
+                return json([
+                    'code' => 1,
+                    'data' => [
+                    ],
+                    'msg' => 'success'
+                ]);
+            }
         }
     }
 }
