@@ -17,7 +17,7 @@ class Order extends BaseController
     public function list($type)
     {
         $model = new OrderModel;
-        $list = $model->getList($this->user['user_id'], $type);
+        $list = $model->getList($this->user['mobile'], $type);
         foreach ($list as $key => $value) {
             foreach ($value['cars'] as $key2 => $value2) {
                 $value['cars'][$key2]['id'] = 'car_' . $value['cars'][$key2]['id'];

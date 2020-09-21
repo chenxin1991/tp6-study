@@ -40,7 +40,7 @@ class ResidentOrder extends Model
      * @param string $type
      * @return int|string
      */
-    public function getCount($user_id, $type = 'all')
+    public function getCount($mobile, $type = 'all')
     {
         // 筛选条件
         $filter = [];
@@ -64,12 +64,12 @@ class ResidentOrder extends Model
                 $filter['orderStatus'] = 4;
                 break;
         }
-        return $this->where('user_id', '=', $user_id)
+        return $this->where('userMobile', '=', $mobile)
             ->where($filter)
             ->count();
     }
 
-    public function getList($user_id, $type = 'all')
+    public function getList($mobile, $type = 'all')
     {
         // 筛选条件
         $filter = [];
@@ -93,7 +93,7 @@ class ResidentOrder extends Model
                 $filter['orderStatus'] = 4;
                 break;
         }
-        return $this->where('user_id', '=', $user_id)
+        return $this->where('userMobile', '=', $mobile)
             ->where($filter)
             ->order(['create_time' => 'desc'])
             ->select()->toArray();
