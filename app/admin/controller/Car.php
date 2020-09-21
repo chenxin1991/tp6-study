@@ -34,6 +34,10 @@ class Car extends BaseController
         $name = input('name');
         $price = input('price');
         $image_url = input('image_url');
+        $loadSize = input('loadSize');
+        $lwh = input('lwh');
+        $volume = input('volume');
+        $manning = input('manning');
         $km_standard = input('km_standard');
         $km_price = input('km_price');
         $floor_standard = input('floor_standard');
@@ -46,6 +50,10 @@ class Car extends BaseController
         $car->name = $name;
         $car->price = $price;
         $car->image_url = $image_url;
+        $car->loadSize = $loadSize;
+        $car->lwh = $lwh;
+        $car->volume = $volume;
+        $car->manning = $manning;
         $car->km_standard = $km_standard;
         $car->km_price = $km_price;
         $car->floor_standard = $floor_standard;
@@ -64,6 +72,10 @@ class Car extends BaseController
         $name = input('name');
         $price = input('price');
         $image_url = input('image_url');
+        $loadSize = input('loadSize');
+        $lwh = input('lwh');
+        $volume = input('volume');
+        $manning = input('manning');
         $km_standard = input('km_standard');
         $km_price = input('km_price');
         $floor_standard = input('floor_standard');
@@ -75,6 +87,10 @@ class Car extends BaseController
         $car->name = $name;
         $car->price = $price;
         $car->image_url = $image_url;
+        $car->loadSize = $loadSize;
+        $car->lwh = $lwh;
+        $car->volume = $volume;
+        $car->manning = $manning;
         $car->km_standard = $km_standard;
         $car->km_price = $km_price;
         $car->floor_standard = $floor_standard;
