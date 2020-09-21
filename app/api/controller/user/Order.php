@@ -89,9 +89,10 @@ class Order extends BaseController
         $newTotalCost = input('newTotalCost');
         $costChangeRemark = input('costChangeRemark');
         $model = orderModel::find($id);
-        if($model->totalCost != $newTotalCost){
+        if ($model->totalCost != $newTotalCost) {
             $model->changeCost = $newTotalCost - $model->totalCost;
             $model->costChangeRemark = $costChangeRemark;
+            $model->totalCost = $newTotalCost;
             if ($model->save()) {
                 return json([
                     'code' => 1,
