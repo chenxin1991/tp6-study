@@ -72,12 +72,12 @@ class Order extends BaseController
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("搬家费");
         $input->SetAttach("小程序");
-        $input->SetOut_trade_no("sdkphp123456789" . date("YmdHis"));
-        $input->SetTotal_fee((int)$order->totalCost*100);
+        $input->SetOut_trade_no(date("YmdHis") . '_' . $order->id);
+        $input->SetTotal_fee("1");
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("test");
-        $input->SetNotify_url("http://paysdk.weixin.qq.com/notify.php");
+        $input->SetNotify_url("https://demo.wjdhbq.com/index.php/api/user/order/replyNotify");
         $input->SetTrade_type("NATIVE");
         $input->SetProduct_id("123456789");
         $result = $notify->GetPayUrl($input);
@@ -93,9 +93,9 @@ class Order extends BaseController
     public function qrcode()
     {
         $url = urldecode($_GET["data"]);
-        if(substr($url, 0, 6) == "weixin"){
+        if (substr($url, 0, 6) == "weixin") {
             \QRcode::png($url);
-        }else{
+        } else {
             header('HTTP/1.1 404 Not Found');
         }
     }

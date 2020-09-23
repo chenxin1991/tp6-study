@@ -7,6 +7,7 @@ Route::post('user/bindPhone', 'user/bindPhone');
 Route::get('category', 'category/index');
 Route::get('carCategory', 'carCategory/index');
 Route::get('driver/order/qrcode', 'driver.order/qrcode');
+Route::post('user/order/replyNotify','user.order/replyNotify');
 Route::group(function () {
     Route::post('ResidentOrder/add', 'ResidentOrder/add');
     Route::post('category/uploadImage', 'category/uploadImage');

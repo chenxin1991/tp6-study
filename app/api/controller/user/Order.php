@@ -107,6 +107,18 @@ class Order extends BaseController
     //微信支付异步通知支付结果
     public function replyNotify()
     {
-
+        //获取返回的xml
+        $testxml = file_get_contents("php://input");
+        //将xml转化为json格式
+        $jsonxml = json_encode(simplexml_load_string($testxml, 'SimpleXMLElement', LIBXML_NOCDATA));
+        //转成数组
+        $result = json_decode($jsonxml, true);
+        file_put_contents('log.txt',$result);
+        if ($result) {
+            //如果成功返回了
+            if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
+                //进行改变订单状态等操作。。。。
+            }
+        }
     }
 }
