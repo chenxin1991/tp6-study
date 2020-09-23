@@ -113,7 +113,6 @@ class Order extends BaseController
         $jsonxml = json_encode(simplexml_load_string($testxml, 'SimpleXMLElement', LIBXML_NOCDATA));
         //转成数组
         $result = json_decode($jsonxml, true);
-        file_put_contents('log.txt', $result['out_trade_no']);
         if ($result) {
             //如果成功返回了
             if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
@@ -123,6 +122,7 @@ class Order extends BaseController
                     $model = orderModel::find($no[1]);
                     $model->orderStatus = 4;
                     $model->payStatus = 1;
+                    $model->finishTime = date('Y-m-d H:i:s', time());
                     $model->save();
                 }
             }
