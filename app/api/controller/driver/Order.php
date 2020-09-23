@@ -6,6 +6,10 @@ use app\BaseController;
 use app\models\ResidentOrder as orderModel;
 use app\models\Leader as LeaderModel;
 
+require_once '../extend/WxPay/lib/WxPay.NativePay.php';
+require_once '../extend/WxPay/lib/WxPay.Config.php';
+require_once '../extend/WxPay/example/phpqrcode/phpqrcode.php';
+
 class Order extends BaseController
 {
     private $user;
@@ -53,10 +57,11 @@ class Order extends BaseController
     }
 
 
-    //返回收款二维码
-    public function qrcode($id)
+    //返回收款url
+    public function payUrl($id)
     {
-        $notify = new NativePay();
+        $order = OrderModel::where(['id' => $id])->find();
+        $notify = new \NativePay();
         /**
          * 流程：
          * 1、调用统一下单，取得code_url，生成二维码
@@ -64,11 +69,11 @@ class Order extends BaseController
          * 3、支付完成之后，微信服务器会通知支付成功
          * 4、在支付成功通知中需要查单确认是否真正支付成功（见：notify.php）
          */
-        $input = new WxPayUnifiedOrder();
-        $input->SetBody("test");
-        $input->SetAttach("test");
+        $input = new \WxPayUnifiedOrder();
+        $input->SetBody("搬家费");
+        $input->SetAttach("小程序");
         $input->SetOut_trade_no("sdkphp123456789" . date("YmdHis"));
-        $input->SetTotal_fee("1");
+        $input->SetTotal_fee((int)$order->totalCost*100);
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("test");
@@ -79,9 +84,19 @@ class Order extends BaseController
         return json([
             'code' => 1,
             'data' => [
-                'url' => $result["code_url"]
+                'code_url' => $result["code_url"]
             ],
             'msg' => 'success'
         ]);
+    }
+
+    public function qrcode()
+    {
+        $url = urldecode($_GET["data"]);
+        if(substr($url, 0, 6) == "weixin"){
+            \QRcode::png($url);
+        }else{
+            header('HTTP/1.1 404 Not Found');
+        }
     }
 }
