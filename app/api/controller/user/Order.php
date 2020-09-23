@@ -103,4 +103,10 @@ class Order extends BaseController
             }
         }
     }
+
+    //微信支付异步通知支付结果
+    public function replyNotify()
+    {
+
+    }
 }
