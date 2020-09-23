@@ -113,11 +113,18 @@ class Order extends BaseController
         $jsonxml = json_encode(simplexml_load_string($testxml, 'SimpleXMLElement', LIBXML_NOCDATA));
         //转成数组
         $result = json_decode($jsonxml, true);
-        file_put_contents('log.txt',$result['out_trade_no']);
+        file_put_contents('log.txt', $result['out_trade_no']);
         if ($result) {
             //如果成功返回了
             if ($result['return_code'] == 'SUCCESS' && $result['result_code'] == 'SUCCESS') {
                 //进行改变订单状态等操作。。。。
+                $no = explode("_", $result['out_trade_no']);
+                if (isset($no[1]) && !empty($no[1])) {
+                    $model = orderModel::find($no[1]);
+                    $model->orderStatus = 4;
+                    $model->payStatus = 1;
+                    $model->save();
+                }
             }
         }
     }
