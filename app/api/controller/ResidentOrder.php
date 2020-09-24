@@ -11,7 +11,7 @@ class ResidentOrder extends BaseController
     {
         $userInfo = request()->user;
         $date = date('Ymd');
-        $order = ResidentOrderModel::whereDay('create_time')->order('id', 'desc')->find();
+        $order = ResidentOrderModel::whereDay('create_time')->order('number', 'desc')->find();
         if ($order) {
             $newNumber = intval(substr($order->number, -4)) + 1;
             $newStr = str_pad($newNumber, 4, "0", STR_PAD_LEFT);
