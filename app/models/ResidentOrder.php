@@ -24,7 +24,7 @@ class ResidentOrder extends Model
 
     public function getOrderStatusAttr($value)
     {
-        $status = [-1 => '已取消', 0 => '待确认', 1 => '待派单', 2 => '待开工', 3 => '待完工', 4 => '待评价', 5 => '已完成'];
+        $status = [-1 => '已取消', 0 => '待确认', 1 => '待派单', 2 => '待开工', 3 => '待完工', 4 => '待评价', 5 => '已关闭'];
         return $status[$value];
     }
 
