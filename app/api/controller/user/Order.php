@@ -128,4 +128,22 @@ class Order extends BaseController
             }
         }
     }
+
+    //用户评价
+    public function comment($id)
+    {
+        $comment = input('comment');
+        $model = OrderModel::find($id);
+        $model->orderStatus = 5;
+        $model->comment = $comment;
+        $model->commentTime = date('Y-m-d H:i:s', time());
+        if ($model->save()) {
+            return json([
+                'code' => 1,
+                'data' => [
+                ],
+                'msg' => 'success'
+            ]);
+        }
+    }
 }
