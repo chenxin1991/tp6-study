@@ -13,6 +13,8 @@ Route::group(function () {
     Route::get('systemUser', 'systemUser/index');
     Route::post('systemUser', 'systemUser/add');
     Route::put('systemUser/:id', 'systemUser/edit');
+    Route::post('systemUser/disable/:id', 'systemUser/disable');
+    Route::post('systemUser/enable/:id', 'systemUser/enable');
     //角色
     Route::get('role', 'role/index');
     Route::post('role', 'role/add');
