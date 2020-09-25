@@ -12,8 +12,8 @@ class SystemUser extends BaseController
         $name = input('name');
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = AdminModel::with('role')->withoutField('password,head_image_url')->where('username', 'like', '%' . $name . '%')
-            ->page($pageNo, $pageSize)->select()->toArray();
+        $data = AdminModel::with('role')->withoutField('password')->where('username', 'like', '%' . $name . '%')
+            ->page($pageNo, $pageSize)->select();
         $count = AdminModel::where('username', 'like', '%' . $name . '%')->count();
         $result = [
             'code' => 200,
@@ -52,7 +52,6 @@ class SystemUser extends BaseController
         $systemUser->name = $name;
         $systemUser->role_id = $role_id;
         $systemUser->username = $username;
-        $systemUser->password = md5('123456');
         $systemUser->save();
     }
 }

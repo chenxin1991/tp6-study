@@ -120,7 +120,9 @@ class Order extends BaseController
                 $no = explode("_", $result['out_trade_no']);
                 if (isset($no[1]) && !empty($no[1])) {
                     $model = orderModel::find($no[1]);
-                    $model->orderStatus = 4;
+                    if ($model->orderStatus == 3) {
+                        $model->orderStatus = 4;
+                    }
                     $model->payStatus = 1;
                     $model->finishTime = date('Y-m-d H:i:s', time());
                     $model->save();
