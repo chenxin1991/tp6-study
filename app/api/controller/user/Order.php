@@ -122,10 +122,10 @@ class Order extends BaseController
                     $model = orderModel::find($no[1]);
                     if ($model->orderStatus == 3) {
                         $model->orderStatus = 4;
+                        $model->payStatus = 1;
+                        $model->finishTime = date('Y-m-d H:i:s', time());
+                        $model->save();
                     }
-                    $model->payStatus = 1;
-                    $model->finishTime = date('Y-m-d H:i:s', time());
-                    $model->save();
                 }
             }
         }
