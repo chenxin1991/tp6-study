@@ -70,4 +70,7 @@ Route::group(function () {
     Route::delete('Goods/:id', 'Goods/del');
     //微信用户
     Route::get('User', 'User/index');
+    //报表统计
+    Route::get('Statistics/telephone', 'Statistics/telephone');
+
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
