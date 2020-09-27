@@ -72,5 +72,5 @@ Route::group(function () {
     Route::get('User', 'User/index');
     //报表统计
     Route::get('Statistics/telephone', 'Statistics/telephone');
-
+    Route::get('Statistics/partner', 'Statistics/partner');
 })->middleware(\app\middleware\AuthTokenMiddleware::class, true);;
