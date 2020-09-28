@@ -9,6 +9,15 @@ class Statistics extends BaseController
 {
     public function telephone()
     {
+        $where = '';
+        $name = input('name');
+        if (!empty($name)) {
+            $where .= " and name like '%".$name."%' ";
+        }
+        $orderDate = input('orderDate');
+        if (!empty($orderDate) && !empty($orderDate[0]) && !empty($orderDate[1])) {
+            $where .= " and (resident_order.create_time between '$orderDate[0] 00:00:00' and '$orderDate[1] 23:59:59')";
+        }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
         $sql = "SELECT admin.name,count(*) AS totalCount, 
@@ -19,7 +28,7 @@ class Statistics extends BaseController
                 SUM(CASE WHEN orderStatus>=4 THEN totalCost ELSE 0 END) completedCost,
                 SUM(CASE WHEN (orderStatus>=1 and orderStatus<=3) THEN totalCost ELSE 0 END) ongoingCost,
                 SUM(CASE WHEN orderStatus=-1  THEN totalCost ELSE 0 END) cancelCost
-                from resident_order,admin where operator > 0 and admin.id = operator group by operator limit " . ($pageNo - 1) * $pageSize . "," . $pageSize;
+                from resident_order,admin where operator > 0 and admin.id = operator $where group by operator limit " . ($pageNo - 1) * $pageSize . "," . $pageSize;
         $data = Db::query($sql);
         foreach ($data as $key => $value) {
             $data[$key]['key'] = $key;
@@ -42,6 +51,15 @@ class Statistics extends BaseController
 
     public function partner()
     {
+        $where = '';
+        $name = input('name');
+        if (!empty($name)) {
+            $where .= " and name like '%".$name."%' ";
+        }
+        $orderDate = input('orderDate');
+        if (!empty($orderDate) && !empty($orderDate[0]) && !empty($orderDate[1])) {
+            $where .= " and (resident_order.create_time between '$orderDate[0] 00:00:00' and '$orderDate[1] 23:59:59')";
+        }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
         $sql = "SELECT leader.name,count(*) AS totalCount,
@@ -52,7 +70,7 @@ class Statistics extends BaseController
                 SUM(CASE WHEN orderStatus>=4 THEN totalCost ELSE 0 END) completedCost,
                 SUM(CASE WHEN (orderStatus>=1 and orderStatus<=3) THEN totalCost ELSE 0 END) ongoingCost,
                 SUM(CASE WHEN orderStatus=-1  THEN totalCost ELSE 0 END) cancelCost
-                from resident_order,leader where leader > 0 and leader.id = leader group by leader limit " . ($pageNo - 1) * $pageSize . "," . $pageSize;
+                from resident_order,leader where leader > 0 and leader.id = leader $where group by leader limit " . ($pageNo - 1) * $pageSize . "," . $pageSize;
         $data = Db::query($sql);
         foreach ($data as $key => $value) {
             $data[$key]['key'] = $key;
