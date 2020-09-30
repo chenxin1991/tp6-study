@@ -10,6 +10,7 @@ Route::get('driver/order/qrcode', 'driver.order/qrcode');
 Route::post('user/order/replyNotify','user.order/replyNotify');
 Route::group(function () {
     Route::post('ResidentOrder/add', 'ResidentOrder/add');
+    Route::post('CompanyOrder/add', 'CompanyOrder/add');
     Route::post('category/uploadImage', 'category/uploadImage');
     Route::get('user/detail', 'user.index/detail');
     Route::get('user/order/list/:type', 'user.order/list');

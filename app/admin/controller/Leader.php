@@ -37,7 +37,6 @@ class Leader extends BaseController
         $leader->name = $name;
         $leader->phone = $phone;
         $leader->save();
-
     }
 
     public function edit($id)

@@ -51,6 +51,11 @@ Route::group(function () {
     Route::post('ResidentOrder/confirm/:id', 'ResidentOrder/confirm');
     Route::post('ResidentOrder/dispatch/:id', 'ResidentOrder/dispatch');
     Route::post('ResidentOrder/cancel/:id', 'ResidentOrder/cancel');
+    //单位搬迁
+    Route::get('CompanyOrder', 'CompanyOrder/index');
+    Route::post('CompanyOrder', 'CompanyOrder/add');
+    Route::put('CompanyOrder/:id', 'CompanyOrder/edit');
+    Route::delete('CompanyOrder/:id', 'CompanyOrder/del');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');

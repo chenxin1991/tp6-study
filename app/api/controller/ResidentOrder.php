@@ -15,9 +15,9 @@ class ResidentOrder extends BaseController
         if ($order) {
             $newNumber = intval(substr($order->number, -4)) + 1;
             $newStr = str_pad($newNumber, 4, "0", STR_PAD_LEFT);
-            $orderNumber = $date . $newStr;
+            $orderNumber = 'C' . $date . $newStr;
         } else {
-            $orderNumber = $date . '0001';
+            $orderNumber = 'C' . $date . '0001';
         }
         $source = 3;//小程序
         $customer = $userInfo['nickName'];
