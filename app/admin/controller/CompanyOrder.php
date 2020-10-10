@@ -9,11 +9,19 @@ class CompanyOrder extends BaseController
 {
     public function index()
     {
-        $name = input('name');
+        $where = [];
+        $keyword = input('keyword');
+        if (!empty($keyword)) {
+            $where[] = ['number|name|phone', 'like', '%' . $keyword . '%'];
+        }
+        $source = input('source');
+        if (!empty($source)) {
+            $where[] = ['source', '=', $source];
+        }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = OrderModel::where('name', 'like', '%' . $name . '%')->page($pageNo, $pageSize)->select()->toArray();
-        $count = OrderModel::where('name', 'like', '%' . $name . '%')->count();
+        $data = OrderModel::where($where)->page($pageNo, $pageSize)->select();
+        $count = OrderModel::where($where)->count();
         $result = [
             'code' => 200,
             'message' => '',
