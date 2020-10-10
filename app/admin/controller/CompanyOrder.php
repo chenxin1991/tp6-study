@@ -39,13 +39,22 @@ class CompanyOrder extends BaseController
 
     public function add()
     {
-
+        $date = date('Ymd');
+        $order = OrderModel::whereDay('create_time')->order('number', 'desc')->find();
+        if ($order) {
+            $newNumber = intval(substr($order->number, -4)) + 1;
+            $newStr = str_pad($newNumber, 4, "0", STR_PAD_LEFT);
+            $orderNumber = 'B' . $date . $newStr;
+        } else {
+            $orderNumber = 'B' . $date . '0001';
+        }
         $source = input('source');
         $name = input('name');
         $customer = input('customer');
         $phone = input('phone');
         $description = input('description');
         $order = new OrderModel;
+        $order->number = $orderNumber;
         $order->source = $source;
         $order->name = $name;
         $order->customer = $customer;
