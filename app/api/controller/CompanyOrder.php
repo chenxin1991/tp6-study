@@ -28,6 +28,7 @@ class CompanyOrder extends BaseController
         $order = new OrderModel;
         $order->number = $orderNumber;
         $order->source = 3;//小程序下单
+        $order->type = 3;//常规项目
         $order->name = $name;
         $order->customer = $customer;
         $order->phone = $phone;

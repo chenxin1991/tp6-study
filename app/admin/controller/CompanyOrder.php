@@ -20,7 +20,7 @@ class CompanyOrder extends BaseController
         }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = OrderModel::where($where)->page($pageNo, $pageSize)->select();
+        $data = OrderModel::where($where)->order('create_time', 'desc')->page($pageNo, $pageSize)->select();
         $count = OrderModel::where($where)->count();
         $result = [
             'code' => 200,
