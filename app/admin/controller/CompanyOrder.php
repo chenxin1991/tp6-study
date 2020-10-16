@@ -14,13 +14,17 @@ class CompanyOrder extends BaseController
         if (!empty($keyword)) {
             $where[] = ['number|name|phone', 'like', '%' . $keyword . '%'];
         }
+        $type = input('type');
+        if (!empty($type)) {
+            $where[] = ['type', '=', $type];
+        }
         $source = input('source');
         if (!empty($source)) {
             $where[] = ['source', '=', $source];
         }
         $pageNo = input("pageNo/d");
         $pageSize = input("pageSize/d");
-        $data = OrderModel::where($where)->order('create_time', 'desc')->page($pageNo, $pageSize)->select();
+        $data = OrderModel::with(['manager', 'leader'])->where($where)->order('create_time', 'desc')->page($pageNo, $pageSize)->select();
         $count = OrderModel::where($where)->count();
         $result = [
             'code' => 200,
@@ -48,6 +52,7 @@ class CompanyOrder extends BaseController
         } else {
             $orderNumber = 'B' . $date . '0001';
         }
+        $type = input('type');
         $source = input('source');
         $name = input('name');
         $customer = input('customer');
@@ -55,22 +60,26 @@ class CompanyOrder extends BaseController
         $description = input('description');
         $order = new OrderModel;
         $order->number = $orderNumber;
+        $order->type = $type;
         $order->source = $source;
         $order->name = $name;
         $order->customer = $customer;
         $order->phone = $phone;
         $order->description = $description;
+        $order->manager_id = 7914;//李总的用户id
         $order->save();
     }
 
     public function edit($id)
     {
         $order = OrderModel::find($id);
+        $type = input('type');
         $source = input('source');
         $name = input('name');
         $customer = input('customer');
         $phone = input('phone');
         $description = input('description');
+        $order->type = $type;
         $order->source = $source;
         $order->name = $name;
         $order->customer = $customer;
