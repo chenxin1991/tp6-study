@@ -66,7 +66,6 @@ class CompanyOrder extends BaseController
         $order->customer = $customer;
         $order->phone = $phone;
         $order->description = $description;
-        $order->manager_id = 7914;//李总的用户id
         $order->save();
     }
 
