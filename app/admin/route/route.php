@@ -56,6 +56,7 @@ Route::group(function () {
     Route::post('CompanyOrder', 'CompanyOrder/add');
     Route::put('CompanyOrder/:id', 'CompanyOrder/edit');
     Route::delete('CompanyOrder/:id', 'CompanyOrder/del');
+    Route::post('CompanyOrder/dispatch/:id', 'CompanyOrder/dispatch');
     //基础数据
     Route::get('common/getRoles', 'common/getRoles');
     Route::get('common/getCars', 'common/getCars');
@@ -63,6 +64,7 @@ Route::group(function () {
     Route::get('common/getSetting', 'common/getSetting');
     Route::get('common/getLeaders', 'common/getLeaders');
     Route::get('common/getCategory', 'common/getCategory');
+    Route::get('common/getProjectLeader', 'common/getProjectLeader');
     //物品分类
     Route::get('Category', 'Category/index');
     Route::post('Category', 'Category/add');

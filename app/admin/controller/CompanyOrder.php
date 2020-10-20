@@ -91,4 +91,16 @@ class CompanyOrder extends BaseController
     {
         OrderModel::destroy($id);
     }
+
+    public function dispatch($id)
+    {
+        $leader = input('leader_id');
+        $leader_id = $leader[1];
+        print_r($leader);die;
+        $model = ResidentOrderModel::find($id);
+        $model->orderStatus = 2;
+        $model->leader = $leader;
+        $model->dispatchTime = date('Y-m-d H:i:s', time());
+        $model->save();
+    }
 }
